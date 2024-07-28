@@ -52,6 +52,15 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'id_area' => ["required"],
+            'id_empresa' => ["required"],
+            'id_estado_usuario' => ["required"],
+            'id_licencia' => ["required"],
+            'id_rol' => ["required"],
+            'pagina_web' => ["required"],
+            'telefono' => ["required"],
+            'id_turno' => ["required"],
+            'contra_update' => ["required"],
         ]);
     }
 
@@ -67,6 +76,15 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            "id_area" => $data["id_area"],
+            "id_empresa" => $data["id_empresa"],
+            "id_estado_usuario" => $data["id_estado_usuario"],
+            "id_licencia" => $data["id_licencia"],
+            "id_rol" => $data["id_rol"],
+            "pagina_web" => $data["pagina_web"],
+            "telefono" => $data["telefono"],
+            "id_turno" => $data["id_turno"],
+            "contra_update" => $data["contra_update"],
         ]);
     }
 }

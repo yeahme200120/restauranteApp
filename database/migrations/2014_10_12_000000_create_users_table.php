@@ -17,6 +17,15 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->integer("id_area");
+            $table->integer("id_empresa");
+            $table->integer("id_estado_usuario");
+            $table->integer("id_licencia");
+            $table->integer("id_rol");
+            $table->string("pagina_web");
+            $table->integer("telefono");
+            $table->integer("id_turno");
+            $table->boolean("contra_update");
             $table->rememberToken();
             $table->timestamps();
         });

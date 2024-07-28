@@ -27,7 +27,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Soporte') }}
@@ -83,18 +83,19 @@
                 </div>
             </div>
         </nav>
-        <div class="row container-fluid">
-            <div class="col-2 p-1 bg-dark" style="height:92.5vh">
+        <div class="row container-fluid justify-content-center">
+            @if(auth()->user())
+            <div class="col-2 bg-dark" style="height:92.5vh">
                 <nav class="navbar navbar-light bg-light">
                     <ul class="list-group">
-                        <li class="list-group-item">
+                        <li class="list-group-item mt-3 p-0">
                             <a class="navbar-brand p-4" href="/" data-toggle="tooltip" data-placement="right"
                                 title="Usuarios">
                                 <i class="fa fa-user-circle" aria-hidden="true"></i>
                                 Usuarios
                             </a>
                         </li>
-                        <li class="list-group-item">
+                        <li class="list-group-item mt-3 p-0">
                             <a class="navbar-brand p-4" href="/empresas" data-toggle="tooltip" data-placement="right"
                                 title="Empresas">
                                 <i class="fa fa-building" aria-hidden="true"></i>
@@ -104,6 +105,7 @@
                     </ul>
                 </nav>
             </div>
+            @endif
             <div class="col-10">
                 <main class="py-4">
                     @yield('content')

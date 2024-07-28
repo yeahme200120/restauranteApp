@@ -5,7 +5,18 @@
         <div class="row justify-content-center">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">{{ __('Usuarios') }}</div>
+                    <div class="card-header">
+                    <div class="row justify-content-between">
+                        <div class="col-2">
+                            {{ __('Usuarios') }}
+                        </div>
+                        <div class="col-1 text-center" data-toggle="tooltip" data-placement="top" title="Agregar Usuario">
+                            <a href="/registrarUsuario" class="text-success" >
+                                <i class="fa fa-address-card" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    </div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -15,7 +26,7 @@
                         @endif
 
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th> name</th>
@@ -36,18 +47,18 @@
                                     @foreach ($usuarios as $user)
                                     @endforeach
                                     <tr>
-                                        <td> $user->name</td>
-                                        <td> $user->email</td>
-                                        <td> $user->password</td>
-                                        <td> $user->id_area</td>
-                                        <td> $user->id_empresa</td>
-                                        <td> $user->id_estado_usuario</td>
-                                        <td> $user->id_licencia</td>
-                                        <td> $user->id_rol</td>
-                                        <td> $user->pagina_web</td>
-                                        <td> $user->telefono</td>
-                                        <td> $user->id_turno</td>
-                                        <td>contra_update</td>
+                                        <td> {{  $user->name  }} </td>
+                                        <td> {{  $user->email  }} </td>
+                                        <td> {{  $user->password  }} </td>
+                                        <td> {{  $user->id_area  }} </td>
+                                        <td> {{  $user->id_empresa  }} </td>
+                                        <td> {{  $user->id_estado_usuario  }} </td>
+                                        <td> {{  $user->id_licencia  }} </td>
+                                        <td> {{  $user->id_rol  }} </td>
+                                        <td> {{  $user->pagina_web  }} </td>
+                                        <td> {{  $user->telefono  }} </td>
+                                        <td> {{  $user->id_turno  }} </td>
+                                        <td>{{  $user->contra_update  }}</td>
                                     </tr>
                                 </tbody>
                             </table>
