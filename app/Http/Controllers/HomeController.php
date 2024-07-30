@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Area;
 use App\Models\Empresa;
 use App\Models\EstadoEmpresa;
+use App\Models\EstadoUsuario;
+use App\Models\Licencia;
+use App\Models\RolUsuario;
+use App\Models\TipoLicencia;
+use App\Models\Turno;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -145,7 +151,14 @@ class HomeController extends Controller
     }
     public function registrarUsuario()
     {
-        return view("usuarios.registrarUsuario");
+        $empresas = Empresa::all();
+        $areas = Area::all();
+        $estados = EstadoUsuario::all();
+        $licencias = TipoLicencia::all();
+        $roles = RolUsuario::where("id","<>",1)->get();
+        $turnos = Turno::all();
+
+        return view("usuarios.registrarUsuario",compact("empresas","areas","estados","licencias","roles","turnos"));
     }
     public function createUser(Request $request)
     {
@@ -161,7 +174,6 @@ class HomeController extends Controller
             'pagina_web' => ["required"],
             'telefono' => ["required"],
             'id_turno' => ["required"],
-            'contra_update' => ["required"],
         ],[
             "name.required" => "El campo name es un campo requerido",
             "email.required" => "El campo email es un campo requerido",
@@ -174,7 +186,6 @@ class HomeController extends Controller
             "pagina_web.required" => "El campo pagina_web es un campo requerido",
             "telefono.required" => "El campo telefono es un campo requerido",
             "id_turno.required" => "El campo id_turno es un campo requerido",
-            "contra_update.required" => "El campo contra_update es un campo requerido",
         ]);
 
         $usuario = new User;
@@ -189,7 +200,7 @@ class HomeController extends Controller
         $usuario->pagina_web = $request->pagina_web;
         $usuario->telefono = $request->telefono;
         $usuario->id_turno = $request->id_turno;
-        $usuario->contra_update = $request->contra_update;
+        $usuario->contra_update = false;
         if($usuario->save()){
             return redirect("/")->with('success', 'Usuario registrado correctamente 😁');   
         }else{
