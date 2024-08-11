@@ -102,6 +102,20 @@
                                 Empresas
                             </a>
                         </li>
+                        <li class="list-group-item mt-3 p-0">
+                            <a class="navbar-brand p-4" href="/provedores" data-toggle="tooltip" data-placement="right"
+                                title="Provedores">
+                                <i class="fa fa-building" aria-hidden="true"></i>
+                                Provedores
+                            </a>
+                        </li>
+                        <li class="list-group-item mt-3 p-0">
+                            <a class="navbar-brand p-4" href="/productos" data-toggle="tooltip" data-placement="right"
+                                title="Productos">
+                                <i class="fa fa-building" aria-hidden="true"></i>
+                                Productos
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>

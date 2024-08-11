@@ -207,4 +207,10 @@ class HomeController extends Controller
             return redirect()->back()->with('error','Error al registrar el usuario 😣');
         }
     }
+    public function provedores(){
+        return view("provedores.provedores");
+    }
+    public function productos(){
+        return view("productos.productos");
+    }
 }
