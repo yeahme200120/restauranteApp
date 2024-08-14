@@ -22,10 +22,10 @@
                     <div class="card-header">
                     <div class="row justify-content-between">
                         <div class="col-2">
-                            <b>{{ __('Provedores') }}</b>
+                            <b>{{ __('Insumos') }}</b>
                         </div>
-                        <div class="col-1 text-center" data-toggle="tooltip" data-placement="top" title="Agregar Provedor">
-                            <a href="/registrarProvedor" class="text-success" >
+                        <div class="col-1 text-center" data-toggle="tooltip" data-placement="top" title="Agregar Insumo">
+                            <a href="/registrarInsumos" class="text-success" >
                                 <i class="fa fa-address-card" aria-hidden="true"></i>
                             </a>
                         </div>
@@ -43,40 +43,40 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th> Nombre</th>
-                                        <th> Direccion</th>
-                                        <th> Correo</th>
-                                        <th> Categoria</th>
+                                        <th> Descripcion</th>
+                                        <th> Area</th>
+                                        <th> Precio Unitario</th>
+                                        <th> IVA</th>
+                                        <th> Unidad</th>
+                                        <th> Cantidad</th>
                                         <th> Empresa</th>
-                                        <th> nombre de la Empresa</th>
-                                        <th> Razon Social</th>
-                                        <th> Telefono</th>
+                                        <th> Provedor</th>
                                         <th> Estatus</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if(isset( $provedores ))
-                                    @foreach ($provedores as $provedor)
+                                    @if(isset( $insumos ))
+                                    @foreach ($insumos as $insumo)
                                     <tr>
-                                        <td> {{  $provedor->nombre_provedor  }} </td>
-                                        <td> {{  $provedor->direccion  }} </td>
-                                        <td> {{  $provedor->correo  }} </td>
-                                        <td> {{  $provedor->categoria  }} </td>
-                                        <td> {{  $provedor->empresa  }} </td>
-                                        <td> {{  $provedor->nombre_empresa  }} </td>
-                                        <td> {{  $provedor->razon_social  }} </td>
-                                        <td> {{  $provedor->telefono  }} </td>
-                                        <td> {{  $provedor->estatus  }} </td>
+                                        <td> {{  $insumo->descripcion  }} </td>
+                                        <td> {{  $insumo->id_area_insumo  }} </td>
+                                        <td> {{  $insumo->precio_unitario  }} </td>
+                                        <td> {{  $insumo->iva  }} </td>
+                                        <td> {{  $insumo->id_unidad  }} </td>
+                                        <td> {{  $insumo->cantidad  }} </td>
+                                        <td> {{  $insumo->id_empresa  }} </td>
+                                        <td> {{  $insumo->id_provedor  }} </td>
+                                        <td> {{  ($insumo->estatus == 0) ? "Activo" : "Eliminado"  }} </td>
                                         <td>
                                             <div class="row">
-                                                <div class="col" data-toggle="tooltip" data-placement="top" title="Editar provedor ">
-                                                    <a href="/editarProvedor/{{$provedor->id}}">
+                                                <div class="col" data-toggle="tooltip" data-placement="top" title="Editar producto {{$insumo->nombre_producto}} ">
+                                                    <a href="/editarInsumos/{{$insumo->id}}">
                                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                                     </a>
                                                 </div>
-                                                <div class="col" data-toggle="tooltip" data-placement="top" title="Eliminar provedor">
-                                                    <a href="/eliminarProvedor/{{$provedor->id}}">
+                                                <div class="col" data-toggle="tooltip" data-placement="top" title="Eliminar producto {{$insumo->nombre_producto}}">
+                                                    <a href="/eliminarInsumos/{{$insumo->id}}">
                                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                                     </a>
                                                 </div>

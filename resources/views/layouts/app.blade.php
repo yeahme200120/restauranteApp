@@ -105,15 +105,29 @@
                         <li class="list-group-item mt-3 p-0">
                             <a class="navbar-brand p-4" href="/provedores" data-toggle="tooltip" data-placement="right"
                                 title="Provedores">
-                                <i class="fa fa-building" aria-hidden="true"></i>
+                                <i class="fa fa-users" aria-hidden="true"></i>
                                 Provedores
                             </a>
                         </li>
                         <li class="list-group-item mt-3 p-0">
                             <a class="navbar-brand p-4" href="/productos" data-toggle="tooltip" data-placement="right"
                                 title="Productos">
-                                <i class="fa fa-building" aria-hidden="true"></i>
+                                <i class="fa fa-cubes" aria-hidden="true"></i>
                                 Productos
+                            </a>
+                        </li>
+                        <li class="list-group-item mt-3 p-0">
+                            <a class="navbar-brand p-4" href="/insumos" data-toggle="tooltip" data-placement="right"
+                                title="Productos">
+                                <i class="fa fa-cubes" aria-hidden="true"></i>
+                                Insumos
+                            </a>
+                        </li>
+                        <li class="list-group-item mt-3 p-0">
+                            <a class="navbar-brand p-4" href="/productos" data-toggle="tooltip" data-placement="right"
+                                title="Productos">
+                                <i class="fa fa-th" aria-hidden="true"></i>
+                                Catalogos
                             </a>
                         </li>
                     </ul>
