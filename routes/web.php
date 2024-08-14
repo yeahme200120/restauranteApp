@@ -26,6 +26,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Productos
     Route::get('/productos', [App\Http\Controllers\HomeController::class, 'productos'])->name('productos');
+    Route::get('/registrarProvedor', [App\Http\Controllers\HomeController::class, 'registrarProvedor'])->name('registrarProvedor');
+    Route::post('/createProvedor', [App\Http\Controllers\HomeController::class, 'createProvedor'])->name('createProvedor');
+    Route::get('/editarProvedor/{id}', [App\Http\Controllers\HomeController::class, 'editarProvedor'])->name('editarProvedor');
+    Route::post('/actualizarProvedor', [App\Http\Controllers\HomeController::class, 'actualizarProvedor'])->name('actualizarProvedor');
+    Route::get('/eliminarProvedor/{id}', [App\Http\Controllers\HomeController::class, 'eliminarProvedor'])->name('eliminarProvedor');
 
 });
 

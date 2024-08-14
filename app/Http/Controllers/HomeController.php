@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Area;
+use App\Models\Categorias;
 use App\Models\Empresa;
 use App\Models\EstadoEmpresa;
 use App\Models\EstadoUsuario;
+use App\Models\EstatusProvedor;
 use App\Models\Licencia;
+use App\Models\Provedor;
 use App\Models\RolUsuario;
 use App\Models\TipoLicencia;
 use App\Models\Turno;
@@ -207,9 +210,69 @@ class HomeController extends Controller
             return redirect()->back()->with('error','Error al registrar el usuario 😣');
         }
     }
+    //*********************     Metodos del provedor    *************************
     public function provedores(){
-        return view("provedores.provedores");
+        $provedores = Provedor::all();
+        return view("provedores.provedores", compact("provedores"));
     }
+    public function registrarProvedor(){
+        $empresas = Empresa::all();
+        $categorias = Categorias::all();
+        $estatusProv = EstatusProvedor::all();
+        return view("provedores.registrarProvedor", compact("empresas","categorias", "estatusProv"));
+    }
+    public function createProvedor(Request $request){
+        $request->validate([
+            "nombre_provedor" => "required",
+            "direccion" => "required",
+            "correo" => "required",
+            "id_categoria" => "required",
+            "id_empresa" => "required",
+            "nombre_empresa" => "required",
+            "razon_social" => "required|unique:provedors",
+            "telefono" => "required",
+            "id_Estatus_provedor" => "required",
+
+
+        ],[
+                'nombre_provedor.required' => "El nombre del provedor es un campo obligatorio",
+                'direccion.required' => "La direccion del provedor es un campo obligatorio",
+                'correo.required' => "El Correo del provedor es un campo obligatorio",
+                'id_categoria.required' => "La categoria del provedor es un campo obligatorio",
+                'id_empresa.required' => "El campo nombre_empresa es un campo obligatorio",
+                'id_empresa.required' => "El campo nombre_empresa es un campo obligatorio",
+                'razon_social.unique' => "La razon social ya se encuentra registrada",
+                'razon_social.required' => "La razon social es un campo obligatorio",
+                'telefono.required' => "El telefono es un campo obligatorio",
+                'id_Estatus_provedor.required' => "El campo del estatus es un campo obligatorio", 
+            ]
+        );  
+        $provedor = new Provedor();
+        $provedor->nombre_provedor = $request->nombre_provedor;
+        $provedor->direccion = $request->direccion;
+        $provedor->correo = $request->correo;
+        $provedor->id_categoria = $request->id_categoria;
+        $provedor->id_empresa = $request->id_empresa;
+        $provedor->nombre_empresa = $request->nombre_empresa;
+        $provedor->razon_social = $request->razon_social;
+        $provedor->telefono = $request->telefono;
+        $provedor->id_Estatus_provedor = $request->id_Estatus_provedor;
+        if($provedor->save()){
+            return redirect()->back()->with('success', 'Provedor registrado correctamente');   
+        }else{
+            return redirect()->back()->with('error','Error al tratar de registrar el provedor. Provedor no registrado 😌');
+        }
+    }
+    public function editarProvedor($id){
+
+    }
+    public function actualizarProvedor(Request $request){
+
+    }
+    public function eliminarProvedor($id){
+
+    }
+    //*********************     Fin metodos del provedor    **********************
     public function productos(){
         return view("productos.productos");
     }

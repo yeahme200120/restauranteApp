@@ -22,10 +22,10 @@
                     <div class="card-header">
                     <div class="row justify-content-between">
                         <div class="col-2">
-                            {{ __('Provedores') }}
+                            <b>{{ __('Provedores') }}</b>
                         </div>
-                        <div class="col-1 text-center" data-toggle="tooltip" data-placement="top" title="Agregar Usuario">
-                            <a href="/registrarUsuario" class="text-success" >
+                        <div class="col-1 text-center" data-toggle="tooltip" data-placement="top" title="Agregar Provedor">
+                            <a href="/registrarProvedor" class="text-success" >
                                 <i class="fa fa-address-card" aria-hidden="true"></i>
                             </a>
                         </div>
@@ -58,20 +58,22 @@
                                     @if(isset( $provedores ))
                                     @foreach ($provedores as $provedor)
                                     <tr>
-                                        <td> {{  $user->nombre_provedor  }} </td>
-                                        <td> {{  $user->direccion  }} </td>
-                                        <td> {{  $user->correo  }} </td>
-                                        <td> {{  $user->id_categoria  }} </td>
-                                        <td> {{  $user->id_empresa  }} </td>
-                                        <td> {{  $user->nombre_empresa  }} </td>
-                                        <td> {{  $user->razon_social  }} </td>
-                                        <td> {{  $user->telefono  }} </td>
-                                        <td> {{  $user->id_Estatus_provedor  }} </td>
+                                        <td> {{  $provedor->nombre_provedor  }} </td>
+                                        <td> {{  $provedor->direccion  }} </td>
+                                        <td> {{  $provedor->correo  }} </td>
+                                        <td> {{  $provedor->id_categoria  }} </td>
+                                        <td> {{  $provedor->id_empresa  }} </td>
+                                        <td> {{  $provedor->nombre_empresa  }} </td>
+                                        <td> {{  $provedor->razon_social  }} </td>
+                                        <td> {{  $provedor->telefono  }} </td>
+                                        <td> {{  $provedor->id_Estatus_provedor  }} </td>
                                     </tr>
                                     @endforeach
                                     @else
                                     <tr>
-                                        <td>No se encontraron registros....</td>
+                                        <td colspan="9"><div class="alert alert-danger" role="alert">
+                                            No se encointraron registros!
+                                          </div></td>
                                     </tr>
                                     @endif
                                 </tbody>
