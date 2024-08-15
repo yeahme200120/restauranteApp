@@ -144,6 +144,7 @@ class ApiController extends Controller
             return 0;
         }
     }
+    
     public function setProvedor(Request $request){
         $provedor = new Provedor();
         $provedor->nombre_provedor = $request->nombre_provedor;
