@@ -67,7 +67,7 @@ class ApiController extends Controller
                         }
                     }else{  
                         //si no esta dentro de su horario
-                        return ["msg" => "Estaas fuera de tu horario"];
+                        return ["msg" => "Estas fuera de tu horario"];
                     }
                 }                
             }else{
@@ -161,6 +161,25 @@ class ApiController extends Controller
         }else{
             return 0;
         }
+    }
+    public function changePasswordApi(Request $request)
+    {
+        $user = json_decode($request->usuario);
+        if(!$user->id) { return ["msg" => "No se recibieron los datos del usuario"];}
+        if(!$request->new_password) { return ["msg" => "No se recibio la nueva Contraseña"];}
+
+        if($user->id_estado_usuario <> 1){
+            return ["msg" => "El usuario no se encuentra activo...."];
+        }else{
+            $update = User::find($user->id);
+            $update->password = Hash::make($request->new_password);
+            $update->contra_update = ($user->contra_update + 1);
+            if($update->save()){
+                return 1;
+            }else{
+                return ["msg" => "Error al intentar cambiar la contraseña. Validar mas tarde"];
+            }
+        } 
     }
 
 }
