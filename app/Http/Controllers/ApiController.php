@@ -173,7 +173,7 @@ class ApiController extends Controller
         }else{
             $update = User::find($user->id);
             $update->password = Hash::make($request->new_password);
-            $update->contra_update = ($user->contra_update + 1);
+            $update->contra_update = ( ((int) $user->contra_update)   + 1 );
             if($update->save()){
                 return 1;
             }else{

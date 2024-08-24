@@ -41,7 +41,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $usuarios = User::all();
+        $usuarios = User::join("estado_usuarios as estadoU", "estadoU.id","=","users.id_estado_usuario")
+                    ->join("areas as a", "a.id","=","users.id_area")
+                    ->join("empresas as e", "e.id","=","users.id_empresa")
+                    ->join("rol_usuarios as r", "r.id","=","users.id_rol")
+                    ->join("turnos as t", "t.id","=","users.id_turno")
+                    ->where("users.id","!=",1)
+                    ->get();
         return view('usuarios.usuarios', compact("usuarios"));
     }
     public function empresas()

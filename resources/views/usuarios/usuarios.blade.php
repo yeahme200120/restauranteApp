@@ -43,11 +43,11 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th> name</th>
-                                        <th> email</th>
-                                        <th> password</th>
-                                        <th> id_area</th>
-                                        <th> id_empresa</th>
+                                        <th> Id</th>
+                                        <th> Nombre</th>
+                                        <th> Correo</th>
+                                        <th> Area</th>
+                                        <th> Empresa</th>
                                         <th> id_estado_usuario</th>
                                         <th> id_licencia</th>
                                         <th> id_rol</th>
@@ -59,21 +59,21 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($usuarios as $user)
-                                    @endforeach
                                     <tr>
+                                        <td> {{  $user->id  }} </td>
                                         <td> {{  $user->name  }} </td>
                                         <td> {{  $user->email  }} </td>
-                                        <td> {{  $user->password  }} </td>
-                                        <td> {{  $user->id_area  }} </td>
-                                        <td> {{  $user->id_empresa  }} </td>
-                                        <td> {{  $user->id_estado_usuario  }} </td>
+                                        <td> {{  $user->nombre_area  }} </td>
+                                        <td> {{  $user->nombre_empresa  }} </td>
+                                        <td> {{  $user->estado_usuario  }} </td>
                                         <td> {{  $user->id_licencia  }} </td>
-                                        <td> {{  $user->id_rol  }} </td>
+                                        <td> {{  $user->rol_usuario  }} </td>
                                         <td> {{  $user->pagina_web  }} </td>
                                         <td> {{  $user->telefono  }} </td>
-                                        <td> {{  $user->id_turno  }} </td>
+                                        <td> {{  $user->turno  }} </td>
                                         <td>{{  $user->contra_update  }}</td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
