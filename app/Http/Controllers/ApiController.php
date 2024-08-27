@@ -109,6 +109,7 @@ class ApiController extends Controller
             return "Sin datos que mostrar";
         }
     }
+
     public function setProducto(Request $request){ 
         $producto = new Producto();
         $producto->nombre_producto = $request->nombre_producto;
@@ -180,6 +181,91 @@ class ApiController extends Controller
                 return ["msg" => "Error al intentar cambiar la contraseña. Validar mas tarde"];
             }
         } 
+    }
+    public function getAreasApi(Request $request){
+        $user = $request; 
+        $usuario = User::find($user->id);
+        $areas = [];
+        if(!$usuario){
+            return ["msg" => "No se recibio el usuario"];
+        }else{
+            if(!$usuario->id_empresa){
+                return ["msg" => "No se encontraro datos relacionados con el usuario"];
+            }else{
+                $areas = Area::where("id_empresa","=",$usuario->id_empresa)->where("estatus_area","=",1)->get();
+                return ["Areas" => $areas];
+            }
+        }
+    }
+    public function getCategoriasApi(Request $request){
+        $user = $request; 
+        $usuario = User::find($user->id);
+        if(!$usuario){
+            return ["msg" => "No se recibio el usuario"];
+        }else{
+            if(!$usuario->id_empresa){
+                return ["msg" => "No se encontraro datos relacionados con el usuario"];
+            }else{
+                $categorias = Categorias::all();
+                return ["Categorias" => $categorias];
+            }
+        }
+    }
+    public function getInsumosApi(Request $request){
+        $user = $request; 
+        $usuario = User::find($user->id);
+        if(!$usuario){
+            return ["msg" => "No se recibio el usuario"];
+        }else{
+            if(!$usuario->id_empresa){
+                return ["msg" => "No se encontraro datos relacionados con el usuario"];
+            }else{
+                $insumos = Insumo::where("id_empresa","=",$usuario->id_empresa)->where("estatus","<>",0)->get();
+                return ["Insumos" => $insumos];
+            }
+        }
+    }
+    public function getProductosApi(Request $request){
+        $user = $request; 
+        $usuario = User::find($user->id);
+        if(!$usuario){
+            return ["msg" => "No se recibio el usuario"];
+        }else{
+            if(!$usuario->id_empresa){
+                return ["msg" => "No se encontraro datos relacionados con el usuario"];
+            }else{
+                $productos = Producto::where("id_empresa","=",$usuario->id_empresa)->whereNotIn("id_estatus_producto",[0,2])->get();
+                return ["Productos" => $productos];
+            }
+        }
+    }
+    public function getProvedoresApi(Request $request){
+        $user = $request; 
+        $usuario = User::find($user->id);
+        if(!$usuario){
+            return ["msg" => "No se recibio el usuario"];
+        }else{
+            if(!$usuario->id_empresa){
+                return ["msg" => "No se encontraro datos relacionados con el usuario"];
+            }else{
+                $provedores = Provedor::where("id_empresa","=",$usuario->id_empresa)->whereNotIn("id_estatus_provedor",[0,2])->get();
+                return ["Provedores" => $provedores];
+            }
+        }
+    }
+    public function getUnidadesApi(Request $request){
+        $user = $request; 
+        $usuario = User::find($user->id);
+        if(!$usuario){
+            return ["msg" => "No se recibio el usuario"];
+        }else{
+            if(!$usuario->id_empresa){
+                return ["msg" => "No se encontraro datos relacionados con el usuario"];
+            }else{
+                $unidades = Unidad::where("id_empresa","=",$usuario->id_empresa)->where("estatus","=", 1)->get();
+                return ["Unidades" => $unidades];
+            }
+        }
     }
 
 }

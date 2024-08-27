@@ -25,3 +25,11 @@ Route::post('/setInsumo', [App\Http\Controllers\ApiController::class, 'setInsumo
 Route::post('/setProvedor', [App\Http\Controllers\ApiController::class, 'setProvedor'])->name('setProvedor');
 //Actualizar Contraseña
 Route::post('/changePasswordApi', [App\Http\Controllers\ApiController::class, 'changePasswordApi'])->name('changePasswordApi');
+//Catalogos separados
+Route::post('/getAreasApi', [App\Http\Controllers\ApiController::class, 'getAreasApi'])->name('getAreasApi');
+Route::post('/getCategoriasApi', [App\Http\Controllers\ApiController::class, 'getCategoriasApi'])->name('getCategoriasApi');
+Route::post('/getInsumosApi', [App\Http\Controllers\ApiController::class, 'getInsumosApi'])->name('getInsumosApi');
+Route::post('/getProductosApi', [App\Http\Controllers\ApiController::class, 'getProductosApi'])->name('getProductosApi');
+Route::post('/getProvedoresApi', [App\Http\Controllers\ApiController::class, 'getProvedoresApi'])->name('getProvedoresApi');
+Route::post('/getUnidadesApi', [App\Http\Controllers\ApiController::class, 'getUnidadesApi'])->name('getUnidadesApi');
+
