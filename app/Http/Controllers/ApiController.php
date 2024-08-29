@@ -80,7 +80,7 @@ class ApiController extends Controller
 
     
     }
-    /* public function getCatalogos(Request $request){
+    public function getCatalogos(Request $request){
         $usuario = User::find($request->usuario);
         $datos = [];
         if($usuario){
@@ -109,7 +109,7 @@ class ApiController extends Controller
         }else{
             return "Sin datos que mostrar";
         }
-    } */
+    }
 
     public function setProducto(Request $request){ 
         $producto = new Producto();
