@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/getCP/{cp}', [App\Http\Controllers\ApiController::class, 'getCP'])->name('getCP');
 Route::post('/logIn', [App\Http\Controllers\ApiController::class, 'login'])->name('login');
-Route::post('/getCatalogos', [App\Http\Controllers\ApiController::class, 'getCatalogos'])->name('getCatalogos');
+//Route::post('/getCatalogos', [App\Http\Controllers\ApiController::class, 'getCatalogos'])->name('getCatalogos');
 Route::post('/setProducto', [App\Http\Controllers\ApiController::class, 'setProducto'])->name('setProducto');
 Route::post('/setInsumo', [App\Http\Controllers\ApiController::class, 'setInsumo'])->name('setInsumo');
 Route::post('/setProvedor', [App\Http\Controllers\ApiController::class, 'setProvedor'])->name('setProvedor');
@@ -32,4 +32,6 @@ Route::post('/getInsumosApi', [App\Http\Controllers\ApiController::class, 'getIn
 Route::post('/getProductosApi', [App\Http\Controllers\ApiController::class, 'getProductosApi'])->name('getProductosApi');
 Route::post('/getProvedoresApi', [App\Http\Controllers\ApiController::class, 'getProvedoresApi'])->name('getProvedoresApi');
 Route::post('/getUnidadesApi', [App\Http\Controllers\ApiController::class, 'getUnidadesApi'])->name('getUnidadesApi');
+Route::post('/getAreaAlmacenApi', [App\Http\Controllers\ApiController::class, 'getAreaAlmacenApi'])->name('getAreaAlmacenApi');
+Route::post('/setAreaAlmacenApi', [App\Http\Controllers\ApiController::class, 'setAreaAlmacenApi'])->name('setAreaAlmacenApi');
 

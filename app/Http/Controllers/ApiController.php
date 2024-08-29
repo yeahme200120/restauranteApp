@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Area;
+use App\Models\AreaAlmacen;
 use App\Models\Categorias;
 use App\Models\CP;
 use App\Models\Empresa;
@@ -79,7 +80,7 @@ class ApiController extends Controller
 
     
     }
-    public function getCatalogos(Request $request){
+    /* public function getCatalogos(Request $request){
         $usuario = User::find($request->usuario);
         $datos = [];
         if($usuario){
@@ -108,7 +109,7 @@ class ApiController extends Controller
         }else{
             return "Sin datos que mostrar";
         }
-    }
+    } */
 
     public function setProducto(Request $request){ 
         $producto = new Producto();
@@ -264,6 +265,70 @@ class ApiController extends Controller
             }else{
                 $unidades = Unidad::where("id_empresa","=",$usuario->id_empresa)->where("estatus","=", 1)->get();
                 return ["Unidades" => $unidades];
+            }
+        }
+    }
+    public function getAreaAlmacenApi(Request $request){
+        $user = $request; 
+        $usuario = User::find($user->id);
+        $areas = AreaAlmacen::whereIn("id_empresa",[0,$usuario->id_empresa])->where("estatus_area","=",1)->get();
+        if(!$usuario){
+            return ["msg" => "No se recibio el usuario"];
+        }else{
+            if(!$usuario->id_empresa){
+                return ["msg" => "No se encontraro datos relacionados con el usuario"];
+            }else{
+                return ["Areas_Almacen" => $areas ];
+            }
+        }
+    }
+    public function setAreaAlmacenApi(Request $request){
+        $user = json_decode($request->usuario); 
+        $usuario = User::find($user->id);
+        $contador = 0;
+        $areas = AreaAlmacen::whereIn("id_empresa",[0,$usuario->id_empresa])->get();
+        $contador = $areas->count();
+        $limite = 2;
+        //Segundo parametro
+        if(!$request->nombre_area){
+            return ["msg" => "El nombre de la nueva Área es requerido. Valida tu información...."];
+        } else {
+            $nombre =  $request->nombre_area; 
+        }
+
+        if(!$usuario){
+            return ["msg" => "No se recibio el usuario"];
+        }else{
+            if(!$usuario->id_empresa){
+                return ["msg" => "No se encontraro datos relacionados con el usuario"];
+            }else{
+                //Licencia completa
+                if(!$usuario->id_licencia == 1){
+                    $area = new AreaAlmacen();
+                    $area->nombre_area = $nombre;
+                    $area->id_empresa = $usuario->id_empresa;
+                    $area->estatus_area = 1;
+                    if($area->save()){
+                        return ["msg" => "Se registro correctamente el area $nombre"];
+                    } else {
+                        return ["msg" => "Error al tratar de registrar el área nueva"];
+                    };             
+                } else {
+                //licencia basica
+                    if($contador <= 2){
+                        $area = new AreaAlmacen();
+                        $area->nombre_area = $nombre;
+                        $area->id_empresa = $usuario->id_empresa;
+                        $area->estatus_area = 1;
+                        if($area->save()){
+                            return ["msg" => "Se registro correctamente el área $nombre"];
+                        } else {
+                            return ["msg" => "Error al tratar de registrar el área nueva"];
+                        };
+                    } else {
+                        return ["msg" => "Esta licencia solo permite registrar maximo $limite areas"];
+                    }
+                }
             }
         }
     }
