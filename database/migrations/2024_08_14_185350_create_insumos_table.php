@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('insumos', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion');
-            $table->integer('id_area_insumo');
+            $table->integer('id_area_almacen');
             $table->float('precio_unitario',8,2);
             $table->float('iva',8,2);
             $table->integer('id_unidad');

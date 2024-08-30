@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Area;
+use App\Models\AreaAlmacen;
 use App\Models\Categorias;
 use App\Models\Empresa;
 use App\Models\EstadoEmpresa;
@@ -333,7 +334,7 @@ class HomeController extends Controller
      //*********************     Metodos del insumos    *************************
      public function insumos(){
         $insumos = Insumo::select("insumos.*","e.nombre_empresa as empresa","u.nombre_unidad as unidad","a.nombre_area as area","p.nombre_provedor as provedor")
-        ->join("areas as a","a.id","=","insumos.id_area_insumo")
+        ->join("area_almacens as a","a.id","=","insumos.id_area_almacen")
         ->join("unidads as u","u.id","=","insumos.id_unidad")
         ->join("empresas as e","e.id","=","insumos.id_empresa")
         ->join("provedors as p","p.id","=","insumos.id_provedor")
@@ -341,7 +342,7 @@ class HomeController extends Controller
         return view("insumos.insumos", compact("insumos"));
     }
     public function registrarInsumos(){
-        $areas = Area::all();
+        $areas = AreaAlmacen::all();
         $unidades = Unidad::all();
         $empresas = Empresa::all();
         $provedores = Provedor::all();
@@ -350,7 +351,7 @@ class HomeController extends Controller
     public function createInsumos(Request $request){
         $request->validate([
             "descripcion" => "required",
-            "id_area_insumo" => "required",
+            "id_area_almacen" => "required",
             "precio_unitario" => "required",
             "iva" => "required",
             "id_unidad" => "required",
@@ -371,7 +372,7 @@ class HomeController extends Controller
         );  
         $insumo = new Insumo();
         $insumo->descripcion = $request->descripcion;
-        $insumo->id_area_insumo = $request->id_area_insumo;
+        $insumo->id_area_almacen = $request->id_area_almacen;
         $insumo->precio_unitario = $request->precio_unitario;
         $insumo->iva = $request->iva;
         $insumo->id_unidad = $request->id_unidad;
@@ -387,7 +388,7 @@ class HomeController extends Controller
     }
     public function editarInsumos($id){
         $insumo = Insumo::find($id);
-        $areas = Area::all();
+        $areas = AreaAlmacen::all();
         $unidades = Unidad::all();
         $empresas = Empresa::all();
         $provedores = Provedor::all();
@@ -396,7 +397,7 @@ class HomeController extends Controller
     public function actualizarInsumos(Request $request){
         $request->validate([
             "descripcion" => "required",
-            "id_area_insumo" => "required",
+            "id_area_almacen" => "required",
             "precio_unitario" => "required",
             "iva" => "required",
             "id_unidad" => "required",
@@ -417,7 +418,7 @@ class HomeController extends Controller
         );  
         $insumo = Insumo::find($request->id);
         $insumo->descripcion = $request->descripcion;
-        $insumo->id_area_insumo = $request->id_area_insumo;
+        $insumo->id_area_almacen = $request->id_area_almacen;
         $insumo->precio_unitario = $request->precio_unitario;
         $insumo->iva = $request->iva;
         $insumo->id_unidad = $request->id_unidad;

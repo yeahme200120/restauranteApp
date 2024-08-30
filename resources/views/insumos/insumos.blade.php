@@ -60,7 +60,7 @@
                                     @foreach ($insumos as $insumo)
                                     <tr>
                                         <td> {{  $insumo->descripcion  }} </td>
-                                        <td> {{  $insumo->id_area_insumo  }} </td>
+                                        <td> {{  $insumo->id_area_almacen  }} </td>
                                         <td> {{  $insumo->precio_unitario  }} </td>
                                         <td> {{  $insumo->iva  }} </td>
                                         <td> {{  $insumo->id_unidad  }} </td>

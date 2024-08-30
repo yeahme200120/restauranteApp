@@ -10,7 +10,7 @@ class Insumo extends Model
     use HasFactory;
     protected $fillable = [
         'descripcion',
-        'id_area_insumo',
+        'id_area_almacen',
         'precio_unitario',
         'iva',
         'id_unidad',

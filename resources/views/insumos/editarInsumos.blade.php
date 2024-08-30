@@ -46,14 +46,14 @@
                                     </div>
 
                                     <div class="col--12 col-md-6 p-1 text-center">
-                                        <label for="id_area_insumo"
+                                        <label for="id_area_almacen"
                                             class="col-md-4 col-form-label text-md-end">{{ __('Area') }}</label>
-                                            <select name="id_area_insumo" id="id_area_insumo" class="form-control  @error('id_area_insumo') is-invalid @enderror">
+                                            <select name="id_area_almacen" id="id_area_almacen" class="form-control  @error('id_area_almacen') is-invalid @enderror">
                                                 @foreach ($areas as $area )
                                                     <option value="{{$area->id}}">{{$area->nombre_area}} </option>
                                                 @endforeach
                                             </select>
-                                        @error('id_area_insumo')
+                                        @error('id_area_almacen')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

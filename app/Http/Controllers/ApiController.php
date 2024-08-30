@@ -111,7 +111,18 @@ class ApiController extends Controller
         }
     }
 
-    public function setProducto(Request $request){ 
+    public function setProducto(Request $request){
+        if(!$request->nombre_producto || $request->nombre_producto == '' || $request->nombre_producto == null){ return ["msg"=>"No se recibio el campo Nombre"]; }
+        if(!$request->precio_compra || $request->precio_compra == '' || $request->precio_compra == null){ return ["msg"=>"No se recibio el campo Precio de compra"]; }
+        if(!$request->precio_venta || $request->precio_venta == '' || $request->precio_venta == null){ return ["msg"=>"No se recibio el campo Precio de venta"]; }
+        if(!$request->id_provedor || $request->id_provedor == '' || $request->id_provedor == null){ return ["msg"=>"No se recibio el campo del Provedor"]; }
+        if(!$request->stock || $request->stock == '' || $request->stock == null){ return ["msg"=>"No se recibio el campo Stock"]; }
+        if(!$request->iva || $request->iva == '' || $request->iva == null){ return ["msg"=>"No se recibio el campo IVA"]; }
+        if(!$request->id_empresa || $request->id_empresa == '' || $request->id_empresa == null){ return ["msg"=>"No se recibio el campo de la Empresa"]; }
+        if(!$request->id_estatus_producto || $request->id_estatus_producto == '' || $request->id_estatus_producto == null){ return ["msg"=>"No se recibio el campo Estatus"]; }
+        if(!$request->id_categoria || $request->id_categoria == '' || $request->id_categoria == null){ return ["msg"=>"No se recibio el campo de la Categoria"]; }
+        if(!$request->unidad || $request->unidad == '' || $request->unidad == null){ return ["msg"=>"No se recibio el campo de la Unidad"]; }
+
         $producto = new Producto();
         $producto->nombre_producto = $request->nombre_producto;
         $producto->precio_compra = $request->precio_compra;
@@ -130,9 +141,20 @@ class ApiController extends Controller
         }
     }
     public function setInsumo(Request $request){
+        
+        if(!$request->descripcion || $request->descripcion == '' || $request->descripcion == null){ return ["msg"=> "No se recibio el campo Descripcion"]; }
+        if(!$request->id_area_almacen || $request->id_area_almacen == '' || $request->id_area_almacen == null){ return ["msg"=> "No se recibio el área"]; }
+        if(!$request->precio_unitario || $request->precio_unitario == '' || $request->precio_unitario == null){ return ["msg"=> "No se recibio el campo Precio Unitario"]; }
+        if(!$request->iva || $request->iva == '' || $request->iva == null){ return ["msg"=> "No se recibio el campo IVA"]; }
+        if(!$request->id_unidad || $request->id_unidad == '' || $request->id_unidad == null){ return ["msg"=> "No se recibio la Unidad"]; }
+        if(!$request->cantidad || $request->cantidad == '' || $request->cantidad == null){ return ["msg"=> "No se recibio el campo Cantidad"]; }
+        if(!$request->id_empresa || $request->id_empresa == '' || $request->id_empresa == null){ return ["msg"=> "No se recibio el campo de la Empresa"]; }
+        if(!$request->id_provedor || $request->id_provedor == '' || $request->id_provedor == null){ return ["msg"=> "No se recibio el campo del Provedor"]; }
+
+
         $insumo = new Insumo();
         $insumo->descripcion = $request->descripcion;
-        $insumo->id_area_insumo = $request->id_area_insumo;
+        $insumo->id_area_almacen = $request->id_area_almacen;
         $insumo->precio_unitario = $request->precio_unitario;
         $insumo->iva = $request->iva;
         $insumo->id_unidad = $request->id_unidad;
@@ -148,6 +170,7 @@ class ApiController extends Controller
     }
     
     public function setProvedor(Request $request){
+
         $provedor = new Provedor();
         $provedor->nombre_provedor = $request->nombre_provedor;
         $provedor->direccion = $request->direccion;
