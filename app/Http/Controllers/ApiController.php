@@ -311,7 +311,7 @@ class ApiController extends Controller
         $contador = 0;
         $areas = AreaAlmacen::whereIn("id_empresa",[0,$usuario->id_empresa])->get();
         $contador = $areas->count();
-        $limite = 2;
+        $limite = 10;
         //Segundo parametro
         if(!$request->nombre_area){
             return ["msg" => "El nombre de la nueva Área es requerido. Valida tu información...."];
@@ -338,7 +338,7 @@ class ApiController extends Controller
                     };             
                 } else {
                 //licencia basica
-                    if($contador <= 2){
+                    if($contador <= $limite){
                         $area = new AreaAlmacen();
                         $area->nombre_area = $nombre;
                         $area->id_empresa = $usuario->id_empresa;
