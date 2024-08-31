@@ -117,7 +117,7 @@ class ApiController extends Controller
         if(!$request->precio_venta || $request->precio_venta == '' || $request->precio_venta == null){ return ["msg"=>"No se recibio el campo Precio de venta"]; }
         if(!$request->id_provedor || $request->id_provedor == '' || $request->id_provedor == null){ return ["msg"=>"No se recibio el campo del Provedor"]; }
         if(!$request->stock || $request->stock == '' || $request->stock == null){ return ["msg"=>"No se recibio el campo Stock"]; }
-        if(!$request->iva || $request->iva == '' || $request->iva == null){ return ["msg"=>"No se recibio el campo IVA"]; }
+        //if(!$request->iva || $request->iva == '' || $request->iva == null){ return ["msg"=>"No se recibio el campo IVA"]; }
         if(!$request->id_empresa || $request->id_empresa == '' || $request->id_empresa == null){ return ["msg"=>"No se recibio el campo de la Empresa"]; }
         if(!$request->id_estatus_producto || $request->id_estatus_producto == '' || $request->id_estatus_producto == null){ return ["msg"=>"No se recibio el campo Estatus"]; }
         if(!$request->id_categoria || $request->id_categoria == '' || $request->id_categoria == null){ return ["msg"=>"No se recibio el campo de la Categoria"]; }
@@ -129,7 +129,7 @@ class ApiController extends Controller
         $producto->precio_venta = $request->precio_venta;
         $producto->id_provedor = $request->id_provedor;
         $producto->stock = $request->stock;
-        $producto->iva = $request->iva;
+        $producto->iva = 0;
         $producto->id_empresa = $request->id_empresa;
         $producto->id_estatus_producto = $request->id_estatus_producto;
         $producto->id_categoria = $request->id_categoria;
