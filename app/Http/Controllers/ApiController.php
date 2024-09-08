@@ -371,4 +371,19 @@ class ApiController extends Controller
             }
         }
     }
+    public function getEmpresaName(Request $request){
+        $user = $request; 
+        $usuario = User::find($user->id);
+        $empresa = [];
+        if(!$usuario){
+            return ["msg" => "No se recibio el usuario"];
+        }else{
+            if(!$usuario->id_empresa){
+                return ["msg" => "No se encontraro datos relacionados con el usuario"];
+            }else{
+                $empresa = Empresa::select("nombre_empresa")->where("id", "=", $usuario->id_empresa)->first();
+                return ["Empresa" => $empresa];
+            }
+        }
+    }
 }

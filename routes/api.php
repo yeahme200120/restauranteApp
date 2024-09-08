@@ -35,4 +35,5 @@ Route::post('/getUnidadesApi', [App\Http\Controllers\ApiController::class, 'getU
 Route::post('/getAreaAlmacenApi', [App\Http\Controllers\ApiController::class, 'getAreaAlmacenApi'])->name('getAreaAlmacenApi');
 Route::post('/setAreaAlmacenApi', [App\Http\Controllers\ApiController::class, 'setAreaAlmacenApi'])->name('setAreaAlmacenApi');
 Route::post('/getEstatusProducto', [App\Http\Controllers\ApiController::class, 'getEstatusProducto'])->name('getEstatusProducto');
+Route::post('/getEmpresaName', [App\Http\Controllers\ApiController::class, 'getEmpresaName'])->name('getEmpresaName');
 
