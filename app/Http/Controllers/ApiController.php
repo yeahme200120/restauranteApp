@@ -7,6 +7,7 @@ use App\Models\AreaAlmacen;
 use App\Models\Categorias;
 use App\Models\CP;
 use App\Models\Empresa;
+use App\Models\EstatusProducto;
 use App\Models\Insumo;
 use App\Models\Licencia;
 use App\Models\Producto;
@@ -355,5 +356,19 @@ class ApiController extends Controller
             }
         }
     }
-
+    public function getEstatusProducto(Request $request){
+        $user = $request; 
+        $usuario = User::find($user->id);
+        $estatus = [];
+        if(!$usuario){
+            return ["msg" => "No se recibio el usuario"];
+        }else{
+            if(!$usuario->id_empresa){
+                return ["msg" => "No se encontraro datos relacionados con el usuario"];
+            }else{
+                $estatus = EstatusProducto::all();
+                return ["EstatusProducto" => $estatus];
+            }
+        }
+    }
 }
