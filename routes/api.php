@@ -39,4 +39,5 @@ Route::post('/getEmpresaName', [App\Http\Controllers\ApiController::class, 'getE
 Route::get('/getRolUsuarios', [App\Http\Controllers\ApiController::class, 'getRolUsuarios'])->name('getRolUsuarios');
 Route::post('/getTurnoUsuario', [App\Http\Controllers\ApiController::class, 'getTurnoUsuario'])->name('getTurnoUsuario');
 Route::post('/getEstatusUsuarios', [App\Http\Controllers\ApiController::class, 'getEstatusUsuarios'])->name('getEstatusUsuarios');
+Route::post('/getUsuariosEmpresa', [App\Http\Controllers\ApiController::class, 'getUsuariosEmpresa'])->name('getUsuariosEmpresa');
 

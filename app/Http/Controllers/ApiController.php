@@ -420,4 +420,44 @@ class ApiController extends Controller
         $estatus = EstadoUsuario::select("id","estado_usuario")->where("id_empresa","=",$usuario->id_empresa)->get();
         return $estatus;
     }
+    public function registraUsuario(Request $request){
+        $usuario = $request->usuario;
+        $datos = $request->datos;
+        if(!$usuario){return ["msg"=> "No se recibieron los datos del usuario Administrador"];}
+        if(!$datos){return ["msg"=> "No se recibieron los datos del usuario a registrar"];}
+        if($datos->name == null || $datos->name == '' || $datos->name == null ){ return ["msg" => "el campo name no puede estar vacio"];};
+        if($datos->email == null || $datos->email == '' || $datos->email == null ){ return ["msg" => "el campo email no puede estar vacio"];};
+        if($datos->password == null || $datos->password == '' || $datos->password == null ){ return ["msg" => "el campo password no puede estar vacio"];};
+        if($datos->id_area == null || $datos->id_area == '' || $datos->id_area == null ){ return ["msg" => "el campo id_area no puede estar vacio"];};
+        if($datos->id_estado_usuario == null || $datos->id_estado_usuario == '' || $datos->id_estado_usuario == null ){ return ["msg" => "el campo id_estado_usuario no puede estar vacio"];};
+        if($datos->id_licencia == null || $datos->id_licencia == '' || $datos->id_licencia == null ){ return ["msg" => "el campo id_licencia no puede estar vacio"];};
+        if($datos->id_rol == null || $datos->id_rol == '' || $datos->id_rol == null ){ return ["msg" => "el campo id_rol no puede estar vacio"];};
+        if($datos->telefono == null || $datos->telefono == '' || $datos->telefono == null ){ return ["msg" => "el campo telefono no puede estar vacio"];};
+        if($datos->id_turno == null || $datos->id_turno == '' || $datos->id_turno == null ){ return ["msg" => "el campo id_turno no puede estar vacio"];};
+        
+        $registro = new User();
+        $registro->name = $datos->name;
+        $registro->email = $datos->email;
+        $registro->password = Hash::make($datos->password);
+        $registro->id_area = $datos->id_area;
+        $registro->id_empresa = $usuario->id_empresa;
+        $registro->id_estado_usuario = $datos->id_estado_usuario;
+        $registro->id_licencia = $datos->id_licencia;
+        $registro->id_rol = $datos->id_rol;
+        $registro->pagina_web = '';
+        $registro->telefono = $datos->telefono;
+        $registro->id_turno = $datos->id_turno;
+        $registro->contra_update = 0;
+        if($registro->save()){
+            return 1;
+        }else{
+            return 0;
+        }
+
+    }
+    public function getUsuariosEmpresa(Request $request){
+        $usuario = $request;
+        $users = User::where("id_empresa","=",$usuario->id_empresa)->where("id_rol",">",1)->get();
+        return $users;
+    }
 }
