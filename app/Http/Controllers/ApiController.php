@@ -171,21 +171,40 @@ class ApiController extends Controller
     }
     
     public function setProvedor(Request $request){
-
-        $provedor = new Provedor();
-        $provedor->nombre_provedor = $request->nombre_provedor;
-        $provedor->direccion = $request->direccion;
-        $provedor->correo = $request->correo;
-        $provedor->id_categoria = $request->id_categoria;
-        $provedor->id_empresa = $request->id_empresa;
-        $provedor->nombre_empresa = $request->nombre_empresa;
-        $provedor->razon_social = $request->razon_social;
-        $provedor->telefono = $request->telefono;
-        $provedor->id_Estatus_provedor = $request->id_Estatus_provedor;
-        if($provedor->save()){
-            return 1;
+        $user = (object) $request->usuario;
+        if(!$user){
+            return ["msg"=> "No se recibio el usuario"];
         }else{
-            return 0;
+            //Validaciones de campos vacios en los datos del provedor
+            $prov = (object) $request->provedor;
+            $empresa = Empresa::select("nombre_empresa")->where("id", "=",$user->id_empresa)->first();
+
+            //Converimos a json para acceder a sus propiedades
+            if(!$prov->nombre_provedor || $prov->nombre_provedor == null || $prov->nombre_provedor == '') { return ["msg"=>"El campo nombre_provedor no puede estar vacio"];}
+            if(!$prov->direccion || $prov->direccion == null || $prov->direccion == '') { return ["msg"=>"El campo direccion no puede estar vacio"];}
+            if(!$prov->correo || $prov->correo == null || $prov->correo == '') { return ["msg"=>"El campo correo no puede estar vacio"];}
+            if(!$prov->id_categoria || $prov->id_categoria == null || $prov->id_categoria == '') { return ["msg"=>"El campo id_categoria no puede estar vacio"];}
+            if(!$user->id_empresa || $user->id_empresa == null || $user->id_empresa == '') { return ["msg"=>"El usuario no cuenta con una empresa registrada"];}
+            if(!$empresa->nombre_empresa || $empresa->nombre_empresa == null || $empresa->nombre_empresa == '') { return ["msg"=>"Valida la información de tu empresa"];}
+            if(!$prov->razon_social || $prov->razon_social == null || $prov->razon_social == '') { return ["msg"=>"El campo razon_social no puede estar vacio"];}
+            if(!$prov->telefono || $prov->telefono == null || $prov->telefono == '') { return ["msg"=>"El campo telefono no puede estar vacio"];}
+            if(!$prov->id_Estatus_provedor || $prov->id_Estatus_provedor == null || $prov->id_Estatus_provedor == '') { return ["msg"=>"El campo id_Estatus_provedor no puede estar vacio"];}
+            
+            $provedor = new Provedor();
+            $provedor->nombre_provedor = $prov->nombre_provedor;
+            $provedor->direccion = $prov->direccion;
+            $provedor->correo = $prov->correo;
+            $provedor->id_categoria = $prov->id_categoria;
+            $provedor->id_empresa = $prov->id_empresa;
+            $provedor->nombre_empresa = $empresa->nombre_empresa;
+            $provedor->razon_social = $prov->razon_social;
+            $provedor->telefono = $prov->telefono;
+            $provedor->id_Estatus_provedor = $prov->id_Estatus_provedor;
+            if($provedor->save()){
+                return 1;
+            }else{
+                return 0;
+            }
         }
     }
     public function changePasswordApi(Request $request)
