@@ -194,7 +194,7 @@ class ApiController extends Controller
             $provedor->direccion = $prov->direccion;
             $provedor->correo = $prov->correo;
             $provedor->id_categoria = $prov->id_categoria;
-            $provedor->id_empresa = $prov->id_empresa;
+            $provedor->id_empresa = $user->id_empresa;
             $provedor->nombre_empresa = $empresa->nombre_empresa;
             $provedor->razon_social = $prov->razon_social;
             $provedor->telefono = $prov->telefono;
