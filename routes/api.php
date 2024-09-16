@@ -37,6 +37,6 @@ Route::post('/setAreaAlmacenApi', [App\Http\Controllers\ApiController::class, 's
 Route::post('/getEstatusProducto', [App\Http\Controllers\ApiController::class, 'getEstatusProducto'])->name('getEstatusProducto');
 Route::post('/getEmpresaName', [App\Http\Controllers\ApiController::class, 'getEmpresaName'])->name('getEmpresaName');
 Route::get('/getRolUsuarios', [App\Http\Controllers\ApiController::class, 'getRolUsuarios'])->name('getRolUsuarios');
-Route::get('/getTurnoUsuario', [App\Http\Controllers\ApiController::class, 'getTurnoUsuario'])->name('getTurnoUsuario');
-Route::get('/getEstatusUsuarios', [App\Http\Controllers\ApiController::class, 'getEstatusUsuarios'])->name('getEstatusUsuarios');
+Route::post('/getTurnoUsuario', [App\Http\Controllers\ApiController::class, 'getTurnoUsuario'])->name('getTurnoUsuario');
+Route::post('/getEstatusUsuarios', [App\Http\Controllers\ApiController::class, 'getEstatusUsuarios'])->name('getEstatusUsuarios');
 
