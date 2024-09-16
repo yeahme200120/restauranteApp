@@ -7,11 +7,13 @@ use App\Models\AreaAlmacen;
 use App\Models\Categorias;
 use App\Models\CP;
 use App\Models\Empresa;
+use App\Models\EstadoUsuario;
 use App\Models\EstatusProducto;
 use App\Models\Insumo;
 use App\Models\Licencia;
 use App\Models\Producto;
 use App\Models\Provedor;
+use App\Models\RolUsuario;
 use App\Models\Turno;
 use App\Models\Unidad;
 use App\Models\User;
@@ -403,5 +405,19 @@ class ApiController extends Controller
                 return ["Empresa" => $empresa];
             }
         }
+    }
+    public function getRolUsuarios(){
+        $roles = RolUsuario::where("id",">",2)->get();
+        return $roles;
+    }
+    public function getTurnoUsuario(Request $request){
+        $usuario = $request;
+        $turnos = Turno::select("id","turno")->where("empresa_id","=",$usuario->id_empresa)->where("estatus","=",1)->get();
+        return $turnos;
+    }
+    public function getEstatusUsuarios(Request $request){
+        $usuario = $request;
+        $estatus = EstadoUsuario::select("id","estado_usuario")->where("id_empresa","=",$usuario->id_empresa)->get();
+        return $estatus;
     }
 }
