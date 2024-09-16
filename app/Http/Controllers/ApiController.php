@@ -435,6 +435,7 @@ class ApiController extends Controller
         if($datos->telefono == null || $datos->telefono == '' || $datos->telefono == null ){ return ["msg" => "el campo telefono no puede estar vacio"];};
         if($datos->id_turno == null || $datos->id_turno == '' || $datos->id_turno == null ){ return ["msg" => "el campo id_turno no puede estar vacio"];};
         
+
         $registro = new User();
         $registro->name = $datos->name;
         $registro->email = $datos->email;
