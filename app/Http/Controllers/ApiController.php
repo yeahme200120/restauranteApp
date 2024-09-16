@@ -188,8 +188,7 @@ class ApiController extends Controller
             if(!$empresa->nombre_empresa || $empresa->nombre_empresa == null || $empresa->nombre_empresa == '') { return ["msg"=>"Valida la información de tu empresa"];}
             if(!$prov->razon_social || $prov->razon_social == null || $prov->razon_social == '') { return ["msg"=>"El campo razon_social no puede estar vacio"];}
             if(!$prov->telefono || $prov->telefono == null || $prov->telefono == '') { return ["msg"=>"El campo telefono no puede estar vacio"];}
-            if(!$prov->id_Estatus_provedor || $prov->id_Estatus_provedor == null || $prov->id_Estatus_provedor == '') { return ["msg"=>"El campo id_Estatus_provedor no puede estar vacio"];}
-            
+             
             $provedor = new Provedor();
             $provedor->nombre_provedor = $prov->nombre_provedor;
             $provedor->direccion = $prov->direccion;
