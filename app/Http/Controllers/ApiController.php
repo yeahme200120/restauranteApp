@@ -199,7 +199,7 @@ class ApiController extends Controller
             $provedor->nombre_empresa = $empresa->nombre_empresa;
             $provedor->razon_social = $prov->razon_social;
             $provedor->telefono = $prov->telefono;
-            $provedor->id_Estatus_provedor = $prov->id_Estatus_provedor;
+            $provedor->id_Estatus_provedor = 1;
             if($provedor->save()){
                 return 1;
             }else{
