@@ -17,7 +17,8 @@ return new class extends Migration
             $table->float('precio_compra',8,2);
             $table->float('precio_venta',8,2);
             $table->integer('id_provedor');
-            $table->float('stock',8,2);
+            $table->integer('cantidad');
+            $table->Integer('stock');
             $table->float('iva',8,2);
             $table->integer('id_empresa');
             $table->integer('id_estatus_producto');

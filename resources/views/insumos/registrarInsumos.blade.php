@@ -103,9 +103,22 @@
                                             class="col-md-4 col-form-label text-md-end">{{ __('Cantidad') }}</label>
                                         <input id="cantidad" type="number" min="1"
                                             class="form-control @error('cantidad') is-invalid @enderror" name="cantidad"
-                                            value="{{ old('cantidad') }}" required autocomplete="name" autofocus>
+                                            value="{{ old('cantidad') }}" required autocomplete="cantidad" autofocus>
 
                                         @error('cantidad')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="col--12 col-md-6 p-1 text-center">
+                                        <label for="stock"
+                                            class="col-md-4 col-form-label text-md-end">{{ __('stock') }}</label>
+                                        <input id="stock" type="number" min="1"
+                                            class="form-control @error('stock') is-invalid @enderror" name="stock"
+                                            value="{{ old('stock') }}" required autocomplete="stock" autofocus>
+
+                                        @error('stock')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

@@ -15,6 +15,7 @@ class Insumo extends Model
         'iva',
         'id_unidad',
         'cantidad',
+        'stock',
         'id_empresa',
         'id_provedor',
         'estatus',

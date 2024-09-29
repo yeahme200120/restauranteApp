@@ -97,6 +97,18 @@
                                     @enderror
                                 </div>
                                 <div class="col--12 col-md-6 p-1 text-center">
+                                    <label for="cantidad"
+                                        class="col-md-4 col-form-label text-md-end">{{ __('Cantidad') }}</label>
+                                    <input id="cantidad" type="number" step=".01" min="1" class="form-control @error('cantidad') is-invalid @enderror" name="cantidad"
+                                        value="{{ old('cantidad') }}" required autocomplete="name" autofocus>
+
+                                    @error('cantidad')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col--12 col-md-6 p-1 text-center">
                                     <label for="iva"
                                         class="col-md-4 col-form-label text-md-end">{{ __('IVA') }}</label>
                                     <input id="iva" type="number" step=".01" min="0"

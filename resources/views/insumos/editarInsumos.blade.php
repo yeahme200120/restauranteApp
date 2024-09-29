@@ -113,6 +113,19 @@
                                         @enderror
                                     </div>
                                     <div class="col--12 col-md-6 p-1 text-center">
+                                        <label for="stock"
+                                            class="col-md-4 col-form-label text-md-end">{{ __('Stock') }}</label>
+                                        <input id="stock" type="number" min="1"
+                                            class="form-control @error('stock') is-invalid @enderror" name="stock"
+                                            value="{{ $insumo->stock }}" required autocomplete="name" autofocus>
+
+                                        @error('stock')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="col--12 col-md-6 p-1 text-center">
                                         <label for="id_empresa"
                                             class="col-md-4 col-form-label text-md-end">{{ __('Empresa') }}</label>
                                             <select name="id_empresa" id="id_empresa" class="form-control  @error('id_empresa') is-invalid @enderror">

@@ -13,6 +13,7 @@ class Producto extends Model
         'precio_compra',
         'precio_venta',
         'id_provedor',
+        'cantidad',
         'stock',
         'iva',
         'id_empresa',

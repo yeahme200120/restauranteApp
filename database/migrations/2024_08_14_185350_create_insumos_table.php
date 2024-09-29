@@ -18,6 +18,7 @@ return new class extends Migration
             $table->float('precio_unitario',8,2);
             $table->float('iva',8,2);
             $table->integer('id_unidad');
+            $table->integer('stock');
             $table->float('cantidad',8,2);
             $table->integer('id_empresa');
             $table->integer('id_provedor');

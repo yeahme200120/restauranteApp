@@ -47,6 +47,7 @@
                                         <th> Precio Compra</th>
                                         <th> Precio Venta</th>
                                         <th> Provedor</th>
+                                        <th> Cantidad</th>
                                         <th> Stock</th>
                                         <th> IVA</th>
                                         <th> Empresa</th>
@@ -64,6 +65,7 @@
                                         <td> {{  $producto->precio_compra  }} </td>
                                         <td> {{  $producto->precio_venta  }} </td>
                                         <td> {{  $producto->provedor  }} </td>
+                                        <td class=" text-center {{ ($producto->cantidad < $producto->stock) ? 'bg-danger text-white' : 'bg-success text-white'   }}"> {{  $producto->cantidad  }} </td>
                                         <td> {{  $producto->stock  }} </td>
                                         <td> {{  $producto->iva  }} </td>
                                         <td> {{  $producto->empresa  }} </td>

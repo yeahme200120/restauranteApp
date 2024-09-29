@@ -43,32 +43,34 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th> Descripcion</th>
-                                        <th> Area</th>
-                                        <th> Precio Unitario</th>
-                                        <th> IVA</th>
-                                        <th> Unidad</th>
-                                        <th> Cantidad</th>
-                                        <th> Empresa</th>
-                                        <th> Provedor</th>
-                                        <th> Estatus</th>
-                                        <th>Acciones</th>
+                                        <th class="text-center"> Descripcion</th>
+                                        <th class="text-center"> Area</th>
+                                        <th class="text-center"> Precio Unitario</th>
+                                        <th class="text-center"> IVA</th>
+                                        <th class="text-center"> Unidad</th>
+                                        <th class="text-center"> Stock</th>
+                                        <th class="text-center"> Cantidad</th>
+                                        <th class="text-center"> Empresa</th>
+                                        <th class="text-center"> Provedor</th>
+                                        <th class="text-center"> Estatus</th>
+                                        <th class="text-center">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if(isset( $insumos ))
                                     @foreach ($insumos as $insumo)
                                     <tr>
-                                        <td> {{  $insumo->descripcion  }} </td>
-                                        <td> {{  $insumo->id_area_almacen  }} </td>
-                                        <td> {{  $insumo->precio_unitario  }} </td>
-                                        <td> {{  $insumo->iva  }} </td>
-                                        <td> {{  $insumo->id_unidad  }} </td>
-                                        <td> {{  $insumo->cantidad  }} </td>
-                                        <td> {{  $insumo->id_empresa  }} </td>
-                                        <td> {{  $insumo->id_provedor  }} </td>
-                                        <td> {{  ($insumo->estatus == 0) ? "Activo" : "Eliminado"  }} </td>
-                                        <td>
+                                        <td class="text-center"> {{  $insumo->descripcion  }} </td>
+                                        <td class="text-center"> {{  $insumo->id_area_almacen  }} </td>
+                                        <td class="text-center"> {{  $insumo->precio_unitario  }} </td>
+                                        <td class="text-center"> {{  $insumo->iva  }} </td>
+                                        <td class="text-center"> {{  $insumo->id_unidad  }} </td>
+                                        <td class="text-center"> {{  $insumo->stock  }} </td>
+                                        <td class="text-center {{ ($insumo->cantidad < $insumo->stock ) ? 'bg-danger text-white' : 'bg-success text-white'}}"> {{  $insumo->cantidad  }} </td>
+                                        <td class="text-center"> {{  $insumo->id_empresa  }} </td>
+                                        <td class="text-center"> {{  $insumo->id_provedor  }} </td>
+                                        <td class="text-center"> {{  ($insumo->estatus == 0) ? "Activo" : "Eliminado"  }} </td>
+                                        <td class="text-center">
                                             <div class="row">
                                                 <div class="col" data-toggle="tooltip" data-placement="top" title="Editar producto {{$insumo->nombre_producto}} ">
                                                     <a href="/editarInsumos/{{$insumo->id}}">

@@ -356,6 +356,7 @@ class HomeController extends Controller
             "iva" => "required",
             "id_unidad" => "required",
             "cantidad" => "required",
+            "stock" => "required",
             "id_empresa" => "required",
             "id_provedor" => "required",
 
@@ -366,6 +367,7 @@ class HomeController extends Controller
                 'iva.required' => "El iva es un campo obligatorio",
                 'id_unidad.required' => "La unidad es un campo obligatorio",
                 'cantidad.required' => "La cantidad es un campo obligatorio",
+                'stock.required' => "La cantidad del Stock es un campo obligatorio",
                 'id_empresa.unique' => "La empresa es un campo obligatorio",
                 'id_provedor.required' => "El provedor es un campo obligatorio",
             ]
@@ -377,6 +379,7 @@ class HomeController extends Controller
         $insumo->iva = $request->iva;
         $insumo->id_unidad = $request->id_unidad;
         $insumo->cantidad = $request->cantidad;
+        $insumo->stock = $request->stock;
         $insumo->id_empresa = $request->id_empresa;
         $insumo->id_provedor = $request->id_provedor;
         $insumo->estatus = 1;
@@ -402,6 +405,7 @@ class HomeController extends Controller
             "iva" => "required",
             "id_unidad" => "required",
             "cantidad" => "required",
+            "stock" => "required",
             "id_empresa" => "required",
             "id_provedor" => "required",
 
@@ -412,6 +416,7 @@ class HomeController extends Controller
                 'iva.required' => "El iva es un campo obligatorio",
                 'id_unidad.required' => "La unidad es un campo obligatorio",
                 'cantidad.required' => "La cantidad es un campo obligatorio",
+                'stock.required' => "La cantidad del Stock es un campo obligatorio",
                 'id_empresa.unique' => "La empresa es un campo obligatorio",
                 'id_provedor.required' => "El provedor es un campo obligatorio",
             ]
@@ -423,6 +428,7 @@ class HomeController extends Controller
         $insumo->iva = $request->iva;
         $insumo->id_unidad = $request->id_unidad;
         $insumo->cantidad = $request->cantidad;
+        $insumo->stock = $request->stock;
         $insumo->id_empresa = $request->id_empresa;
         $insumo->id_provedor = $request->id_provedor;
         $insumo->estatus = 1;
@@ -467,6 +473,7 @@ class HomeController extends Controller
             "precio_compra" => "required",
             "precio_venta" => "required",
             "id_provedor" => "required",
+            "cantidad" => "required",
             "stock" => "required",
             "iva" => "required",
             "id_empresa" => "required",
@@ -478,6 +485,7 @@ class HomeController extends Controller
                 'precio_compra.required' => "Precio de compra del producto es un campo obligatorio",
                 'precio_venta.required' => "El precio de venta del producto es un campo obligatorio",
                 'id_provedor.required' => "El provedor es un campo obligatorio",
+                'cantidad.required' => "El campo Cantidad es un campo obligatorio",
                 'stock.required' => "El campo stock es un campo obligatorio",
                 'iva.required' => "El campo iva es un campo obligatorio. Este puede quedar en cero",
                 'id_empresa.required' => "El campo de la empresa es un campo obligatorio",
@@ -491,6 +499,7 @@ class HomeController extends Controller
         $producto->precio_compra = $request->precio_compra;
         $producto->precio_venta = $request->precio_venta;
         $producto->id_provedor = $request->id_provedor;
+        $producto->cantidad = $request->cantidad;
         $producto->stock = $request->stock;
         $producto->iva = $request->iva;
         $producto->id_empresa = $request->id_empresa;
@@ -520,6 +529,7 @@ class HomeController extends Controller
             "precio_venta" => "required",
             "id_provedor" => "required",
             "stock" => "required",
+            "cantidad" => "required",
             "iva" => "required",
             "id_empresa" => "required",
             "id_estatus_producto" => "required",
@@ -531,6 +541,7 @@ class HomeController extends Controller
                 'precio_venta.required' => "El precio de venta del producto es un campo obligatorio",
                 'id_provedor.required' => "El provedor es un campo obligatorio",
                 'stock.required' => "El campo stock es un campo obligatorio",
+                'cantidad.required' => "El campo Cantidad es un campo obligatorio",
                 'iva.required' => "El campo iva es un campo obligatorio. Este puede quedar en cero",
                 'id_empresa.required' => "El campo de la empresa es un campo obligatorio",
                 'id_estatus_producto.required' => "El estatus es un campo obligatorio",
@@ -544,6 +555,7 @@ class HomeController extends Controller
         $producto->precio_venta = $request->precio_venta;
         $producto->id_provedor = $request->id_provedor;
         $producto->stock = $request->stock;
+        $producto->cantidad = $request->cantidad;
         $producto->iva = $request->iva;
         $producto->id_empresa = $request->id_empresa;
         $producto->id_estatus_producto = $request->id_estatus_producto;

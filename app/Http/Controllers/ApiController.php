@@ -265,7 +265,14 @@ class ApiController extends Controller
             if(!$usuario->id_empresa){
                 return ["msg" => "No se encontraro datos relacionados con el usuario"];
             }else{
-                $insumos = Insumo::where("id_empresa","=",$usuario->id_empresa)->where("estatus","<>",0)->get();
+                $insumos = Insumo::select("insumos.*","empresas.nombre_Empresa","areas.nombre_area","unidads.nombre_unidad","provedors.nombre_provedor")
+                ->join("empresas","empresas.id","=","insumos.id_empresa")
+                ->join("areas","areas.id","=","insumos.id_area_almacen")
+                ->join("unidads","unidads.id","=","insumos.id_unidad")
+                ->join("provedors","provedors.id","=","insumos.id_provedor")
+                ->where("insumos.id_empresa","=",$usuario->id_empresa)
+                ->whereNot("insumos.estatus","=",0)
+                ->get();
                 return ["Insumos" => $insumos];
             }
         }
@@ -279,7 +286,14 @@ class ApiController extends Controller
             if(!$usuario->id_empresa){
                 return ["msg" => "No se encontraro datos relacionados con el usuario"];
             }else{
-                $productos = Producto::where("id_empresa","=",$usuario->id_empresa)->whereNotIn("id_estatus_producto",[0,2])->get();
+                $productos = Producto::select("productos.*","empresas.nombre_Empresa","provedors.nombre_provedor","estatus_productos.estatus_producto","categorias.categoria_producto")
+                ->join("empresas","empresas.id","=","productos.id_empresa")
+                ->join("provedors","provedors.id","=","productos.id_provedor")
+                ->join("estatus_productos","estatus_productos.id","=","productos.id_estatus_producto")
+                ->join("categorias","categorias.id","=","productos.id_categoria")
+                ->where("productos.id_empresa","=",$usuario->id_empresa)
+                ->whereNotIn("id_estatus_producto",[0,2])
+                ->get();
                 return ["Productos" => $productos];
             }
         }
@@ -293,7 +307,13 @@ class ApiController extends Controller
             if(!$usuario->id_empresa){
                 return ["msg" => "No se encontraro datos relacionados con el usuario"];
             }else{
-                $provedores = Provedor::where("id_empresa","=",$usuario->id_empresa)->whereNotIn("id_estatus_provedor",[0,2])->get();
+                $provedores = Provedor::select("provedors.*","empresas.nombre_Empresa","categorias.categoria_producto","estatus_provedors.estatus_provedor")
+                ->join("empresas","empresas.id","=","provedors.id_empresa")
+                ->join("categorias","categorias.id","=","provedors.id_categoria")
+                ->join("estatus_provedors","estatus_provedors.id","=","provedors.id_Estatus_provedor")
+                ->where("provedors.id_empresa","=",$usuario->id_empresa)
+                ->whereNotIn("provedors.id_estatus_provedor",[0,2])
+                ->get();
                 return ["Provedores" => $provedores];
             }
         }
