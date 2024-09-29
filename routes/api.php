@@ -23,6 +23,7 @@ Route::post('/getCatalogos', [App\Http\Controllers\ApiController::class, 'getCat
 Route::post('/setProducto', [App\Http\Controllers\ApiController::class, 'setProducto'])->name('setProducto');
 Route::post('/setInsumo', [App\Http\Controllers\ApiController::class, 'setInsumo'])->name('setInsumo');
 Route::post('/setProvedor', [App\Http\Controllers\ApiController::class, 'setProvedor'])->name('setProvedor');
+Route::post('/setTurnos', [App\Http\Controllers\ApiController::class, 'setTurnos'])->name('setTurnos');
 //Actualizar Contraseña
 Route::post('/changePasswordApi', [App\Http\Controllers\ApiController::class, 'changePasswordApi'])->name('changePasswordApi');
 //Catalogos separados

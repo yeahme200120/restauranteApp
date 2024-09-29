@@ -175,6 +175,32 @@ class ApiController extends Controller
             return 0;
         }
     }
+
+    public function setTurnos(Request $request){
+        $user = (object) $request->usuario;
+        $turno = (object) $request->turno;
+
+        if(!$user){
+            return ["msg"=> "No se recibio el Usuario"];
+        }
+        if(!$turno->turno || $turno->turno == '' || $turno->turno == null){ return ["msg"=> "No se recibio el campo Nombre del turno"]; }
+        if(!$turno->hora_inicio || $turno->hora_inicio == '' || $turno->hora_inicio == null){ return ["msg"=> "No se recibio la hora inicio"]; }
+        if(!$turno->hora_fin || $turno->hora_fin == '' || $turno->hora_fin == null){ return ["msg"=> "No se recibio la hora fin"]; }
+        $hI = date($turno->hora_inicio);
+        $hF = date($turno->hora_fin);
+        $registro = new Turno();
+        $registro->turno = $turno->turno;
+        $registro->hora_inicio = $hI;
+        $registro->hora_fin = $hF;
+        $registro->empresa_id = $user->id_empresa;
+        $registro->estatus = 1;
+
+        if($registro->save()){
+            return 1;   
+        }else{
+            return 0;
+        }
+    }
     
     public function setProvedor(Request $request){
         $user = (object) $request->usuario;
