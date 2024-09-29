@@ -436,7 +436,7 @@ class ApiController extends Controller
     }
     public function getTurnoUsuario(Request $request){
         $usuario = $request;
-        $turnos = Turno::select("id","turno")->where("empresa_id","=",$usuario->id_empresa)->where("estatus","=",1)->get();
+        $turnos = Turno::where("empresa_id","=",$usuario->id_empresa)->where("estatus","=",1)->get();
         return $turnos;
     }
     public function getEstatusUsuarios(Request $request){
