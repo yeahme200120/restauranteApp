@@ -100,20 +100,25 @@ class ApiController extends Controller
             $provedores = Provedor::where("id_empresa","=",$empresa)->where("id_estatus_provedor","<>",0)->where("id_estatus_provedor","<>",2)->get();
             //Obtenemos los unidades de medidas del usuario logeado
             $unidades = Unidad::where("id_empresa","=",$empresa)->where("estatus","=",1)->get();
+            $estadosUsuarios = EstadoUsuario::all();
+            $rolesUsuarios = RolUsuario::where("id",">",1)->get();
+            $turnosEmpresa = Turno::where("empresa_id","=",$usuario->id_empresa)->get();
             $datos= [
                 "Areas" => $areas,
                 "Categorias" => $categorias,
                 "Insumos" => $insumos,
                 "Productos" => $productos,
                 "Provedores" => $provedores,
-                "Unidades" => $unidades
+                "Unidades" => $unidades,
+                "EstadosUsuarios" => $estadosUsuarios,
+                "RolesUsuarios" => $rolesUsuarios,
+                "TurnosEmpresa" => $turnosEmpresa,
             ];
             return $datos;
         }else{
             return "Sin datos que mostrar";
         }
     }
-
     public function setProducto(Request $request){
         if(!$request->nombre_producto || $request->nombre_producto == '' || $request->nombre_producto == null){ return ["msg"=>"No se recibio el campo Nombre"]; }
         if(!$request->precio_compra || $request->precio_compra == '' || $request->precio_compra == null){ return ["msg"=>"No se recibio el campo Precio de compra"]; }
@@ -511,5 +516,35 @@ class ApiController extends Controller
         $usuario = $request;
         $users = User::where("id_empresa","=",$usuario->id_empresa)->where("id_rol",">",1)->get();
         return $users;
+    }
+    public function updateUsuarios(Request $request){
+        if(!$request->usuario){
+            return ["msg"=> "No se recibio el usuario logeado"];
+        }else{
+            if(!$request->datos){return ["msg"=> "No se recibieron los datos del usuario"];}
+            $datos = (object)$request->datos;
+            $user = (object) $request->usuario;
+            
+            if($datos->name == null || $datos->name == '' || $datos->name == null ){ return ["msg" => "El nombre del usuario no puede estar vacio"];};
+            if($datos->id_area == null || $datos->id_area == '' || $datos->id_area == null ){ return ["msg" => "El campo área no puede estar vacio"];};
+            if($datos->id_estado_usuario == null || $datos->id_estado_usuario == '' || $datos->id_estado_usuario == null ){ return ["msg" => "El campo del estado del usuario no puede estar vacio"];};
+            if($datos->id_rol == null || $datos->id_rol == '' || $datos->id_rol == null ){ return ["msg" => "El rol del usuario no puede estar vacio"];};
+            if($datos->telefono == null || $datos->telefono == '' || $datos->telefono == null ){ return ["msg" => "El teléfono del usuario no puede estar vacio"];};
+            if($datos->id_turno == null || $datos->id_turno == '' || $datos->id_turno == null ){ return ["msg" => "El campo del turno del usuario no puede estar vacio"];};
+
+            $update = User::find($user->id);
+            $update->name = $datos->name;
+            $update->id_area = $datos->id_area;
+            $update->id_estado_usuario = $datos->id_estado_usuario;
+            $update->id_rol = $datos->id_rol;
+            $update->telefono = $datos->telefono;
+            $update->id_turno = $datos->id_turno;
+            
+            if($update->save()){
+                return 1;
+            }else{
+                return ["msg"=> "Surgio un error al registrar. Vuelve a intentarlo"];
+            }
+        }        
     }
 }
