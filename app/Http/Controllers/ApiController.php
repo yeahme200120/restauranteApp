@@ -153,7 +153,7 @@ class ApiController extends Controller
         if(!$request->iva || $request->iva == '' || $request->iva == null){ return ["msg"=> "No se recibio el campo IVA"]; }
         if(!$request->id_unidad || $request->id_unidad == '' || $request->id_unidad == null){ return ["msg"=> "No se recibio la Unidad"]; }
         if(!$request->cantidad || $request->cantidad == '' || $request->cantidad == null){ return ["msg"=> "No se recibio el campo Cantidad"]; }
-        if(!$request->stock || $request->stock == '' || $request->stock == null){ return ["msg"=> "No se recibio el campo Stock"]; }
+        //if(!$request->stock || $request->stock == '' || $request->stock == null){ return ["msg"=> "No se recibio el campo Stock"]; }
         if(!$request->id_empresa || $request->id_empresa == '' || $request->id_empresa == null){ return ["msg"=> "No se recibio el campo de la Empresa"]; }
         if(!$request->id_provedor || $request->id_provedor == '' || $request->id_provedor == null){ return ["msg"=> "No se recibio el campo del Provedor"]; }
 
@@ -165,7 +165,7 @@ class ApiController extends Controller
         $insumo->iva = $request->iva;
         $insumo->id_unidad = $request->id_unidad;
         $insumo->cantidad = $request->cantidad;
-        $insumo->stock = $request->stock;
+        $insumo->stock = 0;
         $insumo->id_empresa = $request->id_empresa;
         $insumo->id_provedor = $request->id_provedor;
         $insumo->estatus = 1;
