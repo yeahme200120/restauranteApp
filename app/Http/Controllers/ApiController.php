@@ -119,7 +119,6 @@ class ApiController extends Controller
         if(!$request->precio_compra || $request->precio_compra == '' || $request->precio_compra == null){ return ["msg"=>"No se recibio el campo Precio de compra"]; }
         if(!$request->precio_venta || $request->precio_venta == '' || $request->precio_venta == null){ return ["msg"=>"No se recibio el campo Precio de venta"]; }
         if(!$request->id_provedor || $request->id_provedor == '' || $request->id_provedor == null){ return ["msg"=>"No se recibio el campo del Provedor"]; }
-        if(!$request->stock || $request->stock == '' || $request->stock == null){ return ["msg"=>"No se recibio el campo Stock"]; }
         if(!$request->cantidad || $request->cantidad == '' || $request->cantidad == null){ return ["msg"=>"No se recibio el campo Cantidad"]; }
         if(!$request->iva || $request->iva == '' || $request->iva == null){ return ["msg"=>"No se recibio el campo IVA"]; }
         if(!$request->id_empresa || $request->id_empresa == '' || $request->id_empresa == null){ return ["msg"=>"No se recibio el campo de la Empresa"]; }
@@ -132,7 +131,7 @@ class ApiController extends Controller
         $producto->precio_compra = $request->precio_compra;
         $producto->precio_venta = $request->precio_venta;
         $producto->id_provedor = $request->id_provedor;
-        $producto->stock = $request->stock;
+        $producto->stock = 0;
         $producto->cantidad = $request->cantidad;
         $producto->iva = $request->iva;
         $producto->id_empresa = $request->id_empresa;
