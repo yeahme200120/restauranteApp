@@ -539,12 +539,17 @@ class ApiController extends Controller
             $update->id_rol = $datos->id_rol;
             $update->telefono = $datos->telefono;
             $update->id_turno = $datos->id_turno;
-            
+
             if($update->save()){
                 return 1;
             }else{
                 return ["msg"=> "Surgio un error al registrar. Vuelve a intentarlo"];
             }
         }        
+    }
+    public function getUsuarioLogueado(Request $request){
+        $usuario = (object)$request;
+        $users = User::find($usuario->id);
+        return $users;
     }
 }

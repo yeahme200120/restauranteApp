@@ -43,3 +43,5 @@ Route::post('/getEstatusUsuarios', [App\Http\Controllers\ApiController::class, '
 Route::post('/getUsuariosEmpresa', [App\Http\Controllers\ApiController::class, 'getUsuariosEmpresa'])->name('getUsuariosEmpresa');
 Route::post('/registraUsuario', [App\Http\Controllers\ApiController::class, 'registraUsuario'])->name('registraUsuario');
 Route::post('/updateUsuarios', [App\Http\Controllers\ApiController::class, 'updateUsuarios'])->name('updateUsuarios');
+Route::post('/getUsuarioLogeado', [App\Http\Controllers\ApiController::class, 'getUsuarioLogueado'])->name('getUsuarioLogueado');
+
