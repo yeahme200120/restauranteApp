@@ -425,12 +425,11 @@ class ApiController extends Controller
     }
     //Nuevas  Apis
     public function setCategoriaInsumo(Request $request){
-        $prueba =  (object)$request;
-        echo $prueba;
-        
-        $user = (object)$request->usuario; 
+        $categoria = $request->categoria;
+        $user = (object)$request->usuario;
+        echo $categoria; 
         //Segundo parametro
-        if(!$request->categoria){
+        if(!$categoria){
             return ["msg" => "El nombre de la nueva categoria es requerido. Valida tu información...."];
         } else {
             $nombre =  $request->categoria; 
