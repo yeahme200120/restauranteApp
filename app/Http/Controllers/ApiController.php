@@ -106,6 +106,7 @@ class ApiController extends Controller
             $provedores = Provedor::where("id_empresa","=",$empresa)->where("id_estatus_provedor","<>",0)->where("id_estatus_provedor","<>",2)->get();
             //Obtenemos los unidades de medidas del usuario logeado
             $unidades = Unidad::where("id_empresa","=",$empresa)->where("estatus","=",1)->get();
+            $unidadesInsumos = UnidadInsumo::where("id_empresa","=",$empresa)->where("estatus","=",1)->get();
             $estadosUsuarios = EstadoUsuario::all();
             $rolesUsuarios = RolUsuario::where("id",">",1)->get();
             $turnosEmpresa = Turno::where("empresa_id","=",$usuario->id_empresa)->get();
@@ -121,6 +122,7 @@ class ApiController extends Controller
                 "TurnosEmpresa" => $turnosEmpresa,
                 "CategoriasInsumos" => $categoriasInsumos,
                 "CategoriasProductos" => $categoriasProductos,
+                "UnidadesInsumos" => $unidadesInsumos
             ];
             return $datos;
         }else{
