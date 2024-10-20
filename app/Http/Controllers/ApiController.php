@@ -425,7 +425,7 @@ class ApiController extends Controller
     }
     //Nuevas  Apis
     public function setCategoriaInsumo(Request $request){
-        echo $request;
+        echo $request->categoria;
         $user = (object)$request->usuario; 
         //Segundo parametro
         if(!$request->categoria){
