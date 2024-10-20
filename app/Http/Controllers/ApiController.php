@@ -426,7 +426,6 @@ class ApiController extends Controller
     //Nuevas  Apis
     public function setCategoriaInsumo(Request $request){
         $user = (object)$request->usuario; 
-        $usuario = User::find($user->id);
         //Segundo parametro
         if(!$request->categoria){
             return ["msg" => "El nombre de la nueva categoria es requerido. Valida tu información...."];
@@ -434,15 +433,15 @@ class ApiController extends Controller
             $nombre =  $request->categoria; 
         }
 
-        if(!$usuario){
+        if(!$user){
             return ["msg" => "No se recibio el usuario"];
         }else{
-            if(!$usuario->id_empresa){
+            if(!$user->id_empresa){
                 return ["msg" => "No se encontraro datos relacionados con el usuario"];
             }else{
                 $categoria = new CategoriasInsumos();
                 $categoria->categoria = $nombre;
-                $categoria->id_empresa = $usuario->id_empresa;
+                $categoria->id_empresa = $user->id_empresa;
                 if($categoria->save()){
                     return ["msg" => "Se registro correctamente el area $nombre"];
                 } else {
