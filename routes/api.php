@@ -52,3 +52,5 @@ Route::post('/setColor', [App\Http\Controllers\ApiController::class, 'setColor']
 //Nuevas Apis
 Route::post('/setCategoriaInsumo', [App\Http\Controllers\ApiController::class, 'setCategoriaInsumo'])->name('setCategoriaInsumo');
 Route::post('/setUnidadInsumo', [App\Http\Controllers\ApiController::class, 'setUnidadInsumo'])->name('setUnidadInsumo');
+Route::post('/setCategoriaProducto', [App\Http\Controllers\ApiController::class, 'setCategoriaProducto'])->name('setCategoriaProducto');
+Route::post('/setUnidadProducto', [App\Http\Controllers\ApiController::class, 'setUnidadProducto'])->name('setUnidadProducto');

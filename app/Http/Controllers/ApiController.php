@@ -601,5 +601,59 @@ class ApiController extends Controller
             }
         }
     }
+    public function setCategoriaProducto(Request $request){
+        $categoria = $request->categoria;
+        $user = (object)$request->usuario;
+        //Segundo parametro
+        if(!$categoria){
+            return ["msg" => "El nombre de la nueva categoria es requerido. Valida tu información...."];
+        } else {
+            $nombre =  $request->categoria; 
+        }
+
+        if(!$user){
+            return ["msg" => "No se recibio el usuario"];
+        }else{
+            if(!$user->id_empresa){
+                return ["msg" => "No se encontraro datos relacionados con el usuario"];
+            }else{
+                $categoria = new CategoriasProductos();
+                $categoria->categoria = $nombre;
+                $categoria->empresa_id = $user->id_empresa;
+                if($categoria->save()){
+                    return ["msg" => "Se registro correctamente el area $nombre"];
+                } else {
+                    return ["msg" => "Error al tratar de registrar el área nueva"];
+                };             
+            }
+        }
+    }
+    public function setUnidadProducto(Request $request){
+        $user = (object)($request->usuario); 
+        //Segundo parametro
+        if(!$request->categoria){
+            return ["msg" => "El nombre de la nueva categoria es requerido. Valida tu información...."];
+        } else {
+            $nombre =  $request->categoria; 
+        }
+
+        if(!$user){
+            return ["msg" => "No se recibio el usuario"];
+        }else{
+            if(!$user->id_empresa){
+                return ["msg" => "No se encontraro datos relacionados con el usuario"];
+            }else{
+                $unidad = new UnidadInsumo();
+                $unidad->unidad = $nombre;
+                $unidad->id_empresa = $user->id_empresa;
+                $unidad->estatus = 1;
+                if($unidad->save()){
+                    return ["msg" => "Se registro correctamente la unidad $nombre"];
+                } else {
+                    return ["msg" => "Error al tratar de registrar la unidad. Intenta nuevamente......"];
+                };             
+            }
+        }
+    }
     
 }
