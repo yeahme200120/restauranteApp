@@ -96,8 +96,8 @@ class ApiController extends Controller
             $areas = Area::where("id_empresa","=",$empresa)->where("estatus_area","=",1)->get();
             //Obtenemos las categorias del usuario logeado
             $categorias = Categorias::all();
-            $categoriasInsumos = CategoriasInsumos::where("empresa_id" , "=",$empresa);
-            $categoriasProductos = CategoriasProductos::where("empresa_id" , "=",$empresa);
+            $categoriasInsumos = CategoriasInsumos::where("empresa_id" , "=",$empresa)->get();
+            $categoriasProductos = CategoriasProductos::where("empresa_id" , "=",$empresa)->get();
             //Obtenemos los insumos del usuario logeado
             $insumos = Insumo::where("id_empresa","=",$empresa)->where("estatus","<>",0)->get();
             //Obtenemos los productos del usuario logeado
