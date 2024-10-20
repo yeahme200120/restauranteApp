@@ -45,3 +45,9 @@ Route::post('/registraUsuario', [App\Http\Controllers\ApiController::class, 'reg
 Route::post('/updateUsuarios', [App\Http\Controllers\ApiController::class, 'updateUsuarios'])->name('updateUsuarios');
 Route::post('/getUsuarioLogeado', [App\Http\Controllers\ApiController::class, 'getUsuarioLogueado'])->name('getUsuarioLogueado');
 
+Route::post('/getColor', [App\Http\Controllers\ApiController::class, 'getColor'])->name('getColor');
+Route::post('/setColor', [App\Http\Controllers\ApiController::class, 'setColor'])->name('setColor');
+
+
+//Nuevas Apis
+Route::post('/setCategoriaInsumo', [App\Http\Controllers\ApiController::class, 'setCategoriaInsumo'])->name('setCategoriaInsumo');

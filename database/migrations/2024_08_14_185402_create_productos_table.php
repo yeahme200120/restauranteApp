@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_producto');
-            $table->float('precio_compra',8,2);
+            $table->integer('id_categoria_producto');
+            $table->string('nombre');
+            $table->string('clave');
             $table->float('precio_venta',8,2);
-            $table->integer('id_provedor');
-            $table->integer('cantidad');
-            $table->Integer('stock');
+            $table->float('precio2',8,2)->nullable();
+            $table->float('precio3',8,2)->nullable();
             $table->float('iva',8,2);
             $table->integer('id_empresa');
-            $table->integer('id_estatus_producto');
-            $table->integer('id_categoria');
-            $table->integer('unidad');
+            $table->integer('tipo');
+            $table->integer('id_unidad_producto');
+            $table->integer('estatus');
             $table->timestamps();
         });
     }

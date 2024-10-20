@@ -13,15 +13,14 @@ return new class extends Migration
     {
         Schema::create('insumos', function (Blueprint $table) {
             $table->id();
-            $table->string('descripcion');
-            $table->integer('id_area_almacen');
-            $table->float('precio_unitario',8,2);
-            $table->float('iva',8,2);
+            $table->string('nombre');
+            $table->integer('id_categoria_insumo');
+            $table->string('clave');
             $table->integer('id_unidad');
             $table->integer('stock');
             $table->float('cantidad',8,2);
             $table->integer('id_empresa');
-            $table->integer('id_provedor');
+            $table->integer('tipo');
             $table->integer('estatus');
             $table->timestamps();
         });

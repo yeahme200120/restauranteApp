@@ -14,8 +14,12 @@ use App\Models\Licencia;
 use App\Models\Producto;
 use App\Models\Provedor;
 use App\Models\RolUsuario;
+use App\Models\CategoriasInsumos;
+use App\Models\CategoriasProductos;
+use App\Models\UnidadProducto;
 use App\Models\Turno;
 use App\Models\Unidad;
+use App\Models\UnidadInsumo;
 use App\Models\User;
 use DateTime;
 use Illuminate\Http\JsonResponse;
@@ -92,6 +96,8 @@ class ApiController extends Controller
             $areas = Area::where("id_empresa","=",$empresa)->where("estatus_area","=",1)->get();
             //Obtenemos las categorias del usuario logeado
             $categorias = Categorias::all();
+            $categoriasInsumos = CategoriasInsumos::where("empresa_id" , "=",$empresa);
+            $categoriasProductos = CategoriasProductos::where("empresa_id" , "=",$empresa);
             //Obtenemos los insumos del usuario logeado
             $insumos = Insumo::where("id_empresa","=",$empresa)->where("estatus","<>",0)->get();
             //Obtenemos los productos del usuario logeado
@@ -113,6 +119,8 @@ class ApiController extends Controller
                 "EstadosUsuarios" => $estadosUsuarios,
                 "RolesUsuarios" => $rolesUsuarios,
                 "TurnosEmpresa" => $turnosEmpresa,
+                "CategoriasInsumos" => $categoriasInsumos,
+                "CategoriasProductos" => $categoriasProductos,
             ];
             return $datos;
         }else{
@@ -151,28 +159,16 @@ class ApiController extends Controller
     }
     public function setInsumo(Request $request){
         
-        if(!$request->descripcion || $request->descripcion == '' || $request->descripcion == null){ return ["msg"=> "No se recibio el campo Descripcion"]; }
-        if(!$request->id_area_almacen || $request->id_area_almacen == '' || $request->id_area_almacen == null){ return ["msg"=> "No se recibio el área"]; }
-        if(!$request->precio_unitario || $request->precio_unitario == '' || $request->precio_unitario == null){ return ["msg"=> "No se recibio el campo Precio Unitario"]; }
-        if(!$request->iva || $request->iva == '' || $request->iva == null){ return ["msg"=> "No se recibio el campo IVA"]; }
-        if(!$request->id_unidad || $request->id_unidad == '' || $request->id_unidad == null){ return ["msg"=> "No se recibio la Unidad"]; }
-        if(!$request->cantidad || $request->cantidad == '' || $request->cantidad == null){ return ["msg"=> "No se recibio el campo Cantidad"]; }
-        //if(!$request->stock || $request->stock == '' || $request->stock == null){ return ["msg"=> "No se recibio el campo Stock"]; }
-        if(!$request->id_empresa || $request->id_empresa == '' || $request->id_empresa == null){ return ["msg"=> "No se recibio el campo de la Empresa"]; }
-        if(!$request->id_provedor || $request->id_provedor == '' || $request->id_provedor == null){ return ["msg"=> "No se recibio el campo del Provedor"]; }
-
-
         $insumo = new Insumo();
-        $insumo->descripcion = $request->descripcion;
-        $insumo->id_area_almacen = $request->id_area_almacen;
-        $insumo->precio_unitario = $request->precio_unitario;
-        $insumo->iva = $request->iva;
-        $insumo->id_unidad = $request->id_unidad;
-        $insumo->cantidad = $request->cantidad;
-        $insumo->stock = 0;
-        $insumo->id_empresa = $request->id_empresa;
-        $insumo->id_provedor = $request->id_provedor;
-        $insumo->estatus = 1;
+        $insumo->nombre  = $request->nombre;
+        $insumo->id_categoria_insumo  = $request->id_categoria_insumo;
+        $insumo->clave  = $request->clave;
+        $insumo->id_unidad  = $request->id_unidad;
+        $insumo->stock  = $request->stock;
+        $insumo->cantidad  = $request->cantidad;
+        $insumo->id_empresa  = $request->empresa;
+        $insumo->tipo  = $request->tipo;
+        $insumo->estatus  = 1;        
         if($insumo->save()){
             return 1;   
         }else{
@@ -299,13 +295,8 @@ class ApiController extends Controller
             if(!$usuario->id_empresa){
                 return ["msg" => "No se encontraro datos relacionados con el usuario"];
             }else{
-                $insumos = Insumo::select("insumos.*","empresas.nombre_Empresa","areas.nombre_area","unidads.nombre_unidad","provedors.nombre_provedor")
-                ->join("empresas","empresas.id","=","insumos.id_empresa")
-                ->join("areas","areas.id","=","insumos.id_area_almacen")
-                ->join("unidads","unidads.id","=","insumos.id_unidad")
-                ->join("provedors","provedors.id","=","insumos.id_provedor")
-                ->where("insumos.id_empresa","=",$usuario->id_empresa)
-                ->whereNot("insumos.estatus","=",0)
+                $insumos = Insumo::where("insumos.id_empresa","=",$usuario->id_empresa)
+                ->where("estatus","=",1)
                 ->get();
                 return ["Insumos" => $insumos];
             }
@@ -427,6 +418,62 @@ class ApiController extends Controller
                         return ["msg" => "Esta licencia solo permite registrar maximo $limite areas"];
                     }
                 }
+            }
+        }
+    }
+    //Nuevas  Apis
+    public function setCategoriaInsumo(Request $request){
+        $user = (object)$request->usuario; 
+        $usuario = User::find($user->id);
+        //Segundo parametro
+        if(!$request->categoria){
+            return ["msg" => "El nombre de la nueva categoria es requerido. Valida tu información...."];
+        } else {
+            $nombre =  $request->categoria; 
+        }
+
+        if(!$usuario){
+            return ["msg" => "No se recibio el usuario"];
+        }else{
+            if(!$usuario->id_empresa){
+                return ["msg" => "No se encontraro datos relacionados con el usuario"];
+            }else{
+                $categoria = new CategoriasInsumos();
+                $categoria->categoria = $nombre;
+                $categoria->id_empresa = $usuario->id_empresa;
+                if($categoria->save()){
+                    return ["msg" => "Se registro correctamente el area $nombre"];
+                } else {
+                    return ["msg" => "Error al tratar de registrar el área nueva"];
+                };             
+            }
+        }
+    }
+    public function setUnidadInsumo(Request $request){
+        $user = json_decode($request->usuario); 
+        $usuario = User::find($user->id);
+        //Segundo parametro
+        if(!$request->categoria){
+            return ["msg" => "El nombre de la nueva categoria es requerido. Valida tu información...."];
+        } else {
+            $nombre =  $request->categoria; 
+        }
+
+        if(!$usuario){
+            return ["msg" => "No se recibio el usuario"];
+        }else{
+            if(!$usuario->id_empresa){
+                return ["msg" => "No se encontraro datos relacionados con el usuario"];
+            }else{
+                $unidad = new UnidadInsumo();
+                $unidad->unidad = $nombre;
+                $unidad->id_empresa = $usuario->id_empresa;
+                $unidad->estatus_area = 1;
+                if($unidad->save()){
+                    return ["msg" => "Se registro correctamente la unidad $nombre"];
+                } else {
+                    return ["msg" => "Error al tratar de registrar la unidad. Intenta nuevamente......"];
+                };             
             }
         }
     }

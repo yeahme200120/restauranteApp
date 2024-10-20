@@ -5,18 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Insumo extends Model
+class ColorAppGlobal extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nombre',
-        'id_categoria_insumo',
-        'clave',
-        'id_unidad',
-        'stock',
-        'cantidad',
+        'color',
         'id_empresa',
-        'tipo',
-        'estatus',
-    ]; 
+        'id_usuario',
+    ];  
 }
