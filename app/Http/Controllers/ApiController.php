@@ -168,7 +168,7 @@ class ApiController extends Controller
         $insumo->id_unidad  = $request->id_unidad;
         $insumo->stock  = $request->stock;
         $insumo->cantidad  = $request->cantidad;
-        $insumo->id_empresa  = $request->empresa;
+        $insumo->id_empresa  = $request->id_empresa;
         $insumo->tipo  = $request->tipo;
         $insumo->estatus  = 1;        
         if($insumo->save()){
