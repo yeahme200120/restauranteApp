@@ -423,62 +423,6 @@ class ApiController extends Controller
             }
         }
     }
-    //Nuevas  Apis
-    public function setCategoriaInsumo(Request $request){
-        $categoria = $request->categoria;
-        $user = (object)$request->usuario;
-        //Segundo parametro
-        if(!$categoria){
-            return ["msg" => "El nombre de la nueva categoria es requerido. Valida tu información...."];
-        } else {
-            $nombre =  $request->categoria; 
-        }
-
-        if(!$user){
-            return ["msg" => "No se recibio el usuario"];
-        }else{
-            if(!$user->id_empresa){
-                return ["msg" => "No se encontraro datos relacionados con el usuario"];
-            }else{
-                $categoria = new CategoriasInsumos();
-                $categoria->categoria = $nombre;
-                $categoria->empresa_id = $user->id_empresa;
-                if($categoria->save()){
-                    return ["msg" => "Se registro correctamente el area $nombre"];
-                } else {
-                    return ["msg" => "Error al tratar de registrar el área nueva"];
-                };             
-            }
-        }
-    }
-    public function setUnidadInsumo(Request $request){
-        $user = json_decode($request->usuario); 
-        $usuario = User::find($user->id);
-        //Segundo parametro
-        if(!$request->categoria){
-            return ["msg" => "El nombre de la nueva categoria es requerido. Valida tu información...."];
-        } else {
-            $nombre =  $request->categoria; 
-        }
-
-        if(!$usuario){
-            return ["msg" => "No se recibio el usuario"];
-        }else{
-            if(!$usuario->id_empresa){
-                return ["msg" => "No se encontraro datos relacionados con el usuario"];
-            }else{
-                $unidad = new UnidadInsumo();
-                $unidad->unidad = $nombre;
-                $unidad->id_empresa = $usuario->id_empresa;
-                $unidad->estatus_area = 1;
-                if($unidad->save()){
-                    return ["msg" => "Se registro correctamente la unidad $nombre"];
-                } else {
-                    return ["msg" => "Error al tratar de registrar la unidad. Intenta nuevamente......"];
-                };             
-            }
-        }
-    }
     public function getEstatusProducto(Request $request){
         $user = $request; 
         $usuario = User::find($user->id);
@@ -601,4 +545,61 @@ class ApiController extends Controller
         $users = User::find($usuario->id);
         return $users;
     }
+
+    //Nuevas  Apis
+    public function setCategoriaInsumo(Request $request){
+        $categoria = $request->categoria;
+        $user = (object)$request->usuario;
+        //Segundo parametro
+        if(!$categoria){
+            return ["msg" => "El nombre de la nueva categoria es requerido. Valida tu información...."];
+        } else {
+            $nombre =  $request->categoria; 
+        }
+
+        if(!$user){
+            return ["msg" => "No se recibio el usuario"];
+        }else{
+            if(!$user->id_empresa){
+                return ["msg" => "No se encontraro datos relacionados con el usuario"];
+            }else{
+                $categoria = new CategoriasInsumos();
+                $categoria->categoria = $nombre;
+                $categoria->empresa_id = $user->id_empresa;
+                if($categoria->save()){
+                    return ["msg" => "Se registro correctamente el area $nombre"];
+                } else {
+                    return ["msg" => "Error al tratar de registrar el área nueva"];
+                };             
+            }
+        }
+    }
+    public function setUnidadInsumo(Request $request){
+        $user = (object)($request->usuario); 
+        //Segundo parametro
+        if(!$request->categoria){
+            return ["msg" => "El nombre de la nueva categoria es requerido. Valida tu información...."];
+        } else {
+            $nombre =  $request->categoria; 
+        }
+
+        if(!$user){
+            return ["msg" => "No se recibio el usuario"];
+        }else{
+            if(!$user->id_empresa){
+                return ["msg" => "No se encontraro datos relacionados con el usuario"];
+            }else{
+                $unidad = new UnidadInsumo();
+                $unidad->unidad = $nombre;
+                $unidad->id_empresa = $user->id_empresa;
+                $unidad->estatus = 1;
+                if($unidad->save()){
+                    return ["msg" => "Se registro correctamente la unidad $nombre"];
+                } else {
+                    return ["msg" => "Error al tratar de registrar la unidad. Intenta nuevamente......"];
+                };             
+            }
+        }
+    }
+    
 }
