@@ -101,7 +101,7 @@ class ApiController extends Controller
             //Obtenemos los insumos del usuario logeado
             $insumos = Insumo::where("id_empresa","=",$empresa)->where("estatus","<>",0)->get();
             //Obtenemos los productos del usuario logeado
-            $productos = Producto::where("id_empresa","=",$empresa)->where("id_estatus_producto","<>",0)->where("id_estatus_producto","<>",2)->get();
+            $productos = Producto::where("id_empresa","=",$empresa)->where("estatus","=",1)->get();
             //Obtenemos los provedores del usuario logeado
             $provedores = Provedor::where("id_empresa","=",$empresa)->where("id_estatus_provedor","<>",0)->where("id_estatus_provedor","<>",2)->get();
             //Obtenemos los unidades de medidas del usuario logeado
