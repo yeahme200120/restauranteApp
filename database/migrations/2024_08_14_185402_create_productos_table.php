@@ -16,9 +16,9 @@ return new class extends Migration
             $table->integer('id_categoria_producto');
             $table->string('nombre');
             $table->string('clave');
-            $table->float('precio_venta',8,2);
-            $table->float('precio2',8,2)->nullable();
-            $table->float('precio3',8,2)->nullable();
+            $table->float('precio_venta1',8,2);
+            $table->float('precio_venta2',8,2)->nullable();
+            $table->float('precio_venta3',8,2)->nullable();
             $table->float('iva',8,2);
             $table->integer('id_empresa');
             $table->integer('tipo');
