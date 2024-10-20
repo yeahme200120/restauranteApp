@@ -443,7 +443,7 @@ class ApiController extends Controller
             }else{
                 $categoria = new CategoriasInsumos();
                 $categoria->categoria = $nombre;
-                $categoria->id_empresa = $user->id_empresa;
+                $categoria->empresa_id = $user->id_empresa;
                 if($categoria->save()){
                     return ["msg" => "Se registro correctamente el area $nombre"];
                 } else {
